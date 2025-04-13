@@ -134,12 +134,12 @@ body {
 }
 
 .dark-mode .account-btn {
-    background-color: #2196f3;
-    color: #fff;
+    background-color: #007bff;
+    color: #ffffff;
 }
 
 .dark-mode .account-btn:hover {
-    background-color: #1976d2;
+    background-color: #0056b3;
 }
 
 .user-icon {
@@ -419,11 +419,12 @@ body {
 /* Dark Mode Styles - En sona eklenecek */
 .dark-mode {
     background-color: #1a1a1a;
+    color: #ffffff;
 }
 
 .dark-mode .header {
     background-color: #2d2d2d;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .dark-mode .main-container {
@@ -432,7 +433,7 @@ body {
 }
 
 .dark-mode .logo a {
-    color: #fff;
+    color: #ffffff;
 }
 
 .dark-mode .logo a:hover {
@@ -441,6 +442,7 @@ body {
 
 .dark-mode .user-icon {
     background-image: url('img/darkuser.png');
+    border-color: #ffffff;
 }
 
 .dark-mode .left-menu,
@@ -2465,12 +2467,14 @@ body.dark-mode.login-page {
 }
 
 .hero-btn {
-    padding: 15px 30px;
-    border-radius: 10px;
+    padding: 15px 35px;
+    border-radius: 30px;
     font-size: 1.1em;
     text-decoration: none;
     transition: all 0.3s ease;
-    font-weight: 500;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .hero-btn.primary {
@@ -2486,12 +2490,36 @@ body.dark-mode.login-page {
 
 .hero-btn.secondary {
     background: transparent;
-    color: #007bff;
-    border: 2px solid #007bff;
+    color: white;
+    border: 2px solid white;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.hero-btn.secondary:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: white;
+    transition: all 0.4s ease;
+    z-index: -1;
 }
 
 .hero-btn.secondary:hover {
-    background: rgba(0, 123, 255, 0.1);
+    color: #007bff;
+}
+
+.hero-btn.secondary:hover:before {
+    left: 0;
+}
+
+.hero-btn.secondary:hover {
+    background: white;
+    color: #007bff;
     transform: translateY(-2px);
 }
 
@@ -2570,18 +2598,21 @@ body.dark-mode.login-page {
     height: 200px;
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    display: block;
 }
 
 .course-image.mathematics {
-    background-image: url('img/math.jpg');
+    background-image: url('img/mat.jpg');
 }
 
 .course-image.physics {
-    background-image: url('img/physics.jpg');
+    background-image: url('img/fizik.jpg');
 }
 
 .course-image.chemistry {
-    background-image: url('img/chemistry.jpg');
+    background-image: url('img/kimya.jpg');
 }
 
 .course-card h3 {
@@ -2950,17 +2981,31 @@ body.dark-mode.login-page {
 
 .dark-mode .yuame-features h2 {
     color: #fff;
-    
+
 }
 
 .dark-mode .feature-card {
-    background: #2d2d2d;
+    background: #333333;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     color: #fff;
 }
 
 .dark-mode .feature-card:hover {
+    transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .feature-icon {
+    background: #007bff;
+    color: #ffffff;
+}
+
+.dark-mode .feature-card h3 {
+    color: #ffffff;
+}
+
+.dark-mode .feature-card p {
+    color: #e0e0e0;
 }
 
 .dark-mode .yuame-courses h2 {
@@ -3130,6 +3175,7 @@ body.dark-mode.login-page {
 .dark-mode .forgot-password-page {
     background: #1a1a1a;
 }
+
 .dark-mode .verification-steps {
     background: #2d2d2d;
 }
@@ -3153,8 +3199,15 @@ body.dark-mode.login-page {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Şifremi Unuttum Sayfası Stilleri */
@@ -3175,5 +3228,379 @@ body.dark-mode.login-page {
 }
 
 .forgot-password-page .wrapper {
-    margin-top: 70px; /* Header yüksekliği kadar margin */
+    margin-top: 70px;
+    /* Header yüksekliği kadar margin */
+}
+
+/* Carousel Styles */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    height: 60vh;
+    min-height: 400px;
+    border-radius: 20px;
+    background: #1a1a1a;
+}
+
+.carousel-slides {
+    position: relative;
+    height: 100%;
+}
+
+.carousel-slide {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.slide-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.slide-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.1);
+    transition: transform 8s ease;
+}
+
+.carousel-slide.active .slide-image img {
+    transform: scale(1);
+}
+
+.slide-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.2) 100%);
+}
+
+.slide-content {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    color: white;
+    z-index: 2;
+    padding: 0 10%;
+}
+
+.content-inner {
+    max-width: 600px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease;
+}
+
+.carousel-slide.active .content-inner {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.slide-content h1 {
+    font-size: 3.5em;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.highlight {
+    color: #007bff;
+    font-weight: 800;
+}
+
+.slide-content p {
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 500px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.hero-btn {
+    padding: 15px 35px;
+    border-radius: 30px;
+    font-size: 1.1em;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.hero-btn.primary {
+    background: #007bff;
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+.hero-btn.primary:hover {
+    background: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+}
+
+.hero-btn.secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.hero-btn.secondary:hover {
+    background: white;
+    color: #007bff;
+    transform: translateY(-2px);
+}
+
+/* Navigation Buttons */
+.prev,
+.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 3;
+    transition: all 0.3s ease;
+    opacity: 0.6;
+}
+
+.prev {
+    left: 30px;
+}
+
+.next {
+    right: 30px;
+}
+
+.prev:hover,
+.next:hover {
+    opacity: 1;
+}
+
+.prev svg,
+.next svg {
+    fill: white;
+    width: 40px;
+    height: 40px;
+}
+
+/* Progress Bar */
+.carousel-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    z-index: 3;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0;
+    background: #007bff;
+    transition: width 0.3s linear;
+}
+
+/* Fade Animation */
+.fade {
+    animation: fade 1s ease-in-out;
+}
+
+@keyframes fade {
+    from {
+        opacity: 0.4;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .carousel-container {
+        height: 70vh;
+    }
+
+    .slide-content h1 {
+        font-size: 2.8em;
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel-container {
+        height: 60vh;
+    }
+
+    .slide-content {
+        padding: 0 5%;
+        text-align: center;
+    }
+
+    .content-inner {
+        margin: 0 auto;
+    }
+
+    .slide-content h1 {
+        font-size: 2.2em;
+    }
+
+    .slide-content p {
+        font-size: 1.1em;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .slide-overlay {
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 100%);
+    }
+}
+
+@media (max-width: 576px) {
+    .carousel-container {
+        height: 90vh;
+        min-height: 500px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .slide-content h1 {
+        font-size: 2em;
+    }
+
+    .slide-content p {
+        font-size: 1em;
+    }
+}
+
+/* Courses Section Dark Mode */
+.dark-mode .yuame-courses {
+    background-color: #1a1a1a;
+}
+
+.dark-mode .course-card {
+    background: #2d2d2d;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .course-card h3 {
+    color: #ffffff;
+}
+
+.dark-mode .course-card p {
+    color: #e0e0e0;
+}
+
+.dark-mode .course-btn {
+    background: #007bff;
+    color: #ffffff;
+}
+
+.dark-mode .course-btn:hover {
+    background: #0056b3;
+}
+
+/* Stats Section Dark Mode */
+.dark-mode .yuame-stats {
+    background-color: #2d2d2d;
+}
+
+.dark-mode .stat-number {
+    color: #007bff;
+}
+
+.dark-mode .stat-label {
+    color: #ffffff;
+}
+
+/* CTA Section Dark Mode */
+.dark-mode .yuame-cta {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+}
+
+.dark-mode .yuame-cta h2 {
+    color: #ffffff;
+}
+
+.dark-mode .yuame-cta p {
+    color: #e0e0e0;
+}
+
+/* Progress Bar Dark Mode */
+.dark-mode .carousel-progress {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .progress-bar {
+    background: #007bff;
+}
+
+/* Navigation Arrows Dark Mode */
+.dark-mode .prev svg,
+.dark-mode .next svg {
+    fill: #ffffff;
+}
+
+.dark-mode .prev:hover,
+.dark-mode .next:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Hover Effects in Dark Mode */
+.dark-mode .hero-btn:hover {
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+}
+
+.dark-mode .account-btn:hover {
+    background: #0056b3;
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+}
+
+/* Scrollbar Dark Mode */
+.dark-mode ::-webkit-scrollbar {
+    background-color: #1a1a1a;
+}
+
+.dark-mode ::-webkit-scrollbar-thumb {
+    background-color: #3d3d3d;
+}
+
+.dark-mode ::-webkit-scrollbar-thumb:hover {
+    background-color: #4d4d4d;
 }

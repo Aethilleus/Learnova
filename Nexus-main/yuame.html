@@ -7,6 +7,36 @@
     <title>YUAME - Eğitimde Yeni Bir Dönem</title>
     <link rel="stylesheet" href="index.css">
     <script src="index.js"></script>
+    <style>
+        body {
+            font-family: 'Trifelia', sans-serif !important;
+        }
+
+        .slide-content h1,
+        .slide-content p,
+        .hero-btn,
+        .feature-card h3,
+        .feature-card p,
+        .course-card h3,
+        .course-card p,
+        .stat-number,
+        .stat-label,
+        .yuame-cta h2,
+        .yuame-cta p {
+            font-family: 'Trifelia', sans-serif !important;
+        }
+
+        /* Navbar için cluxy yazı tipi */
+        .navbar,
+        .navbar a {
+            font-family: 'cluxy', sans-serif !important;
+        }
+
+        .logo,
+        .logo a {
+            font-family: 'cluxy', sans-serif !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -42,17 +72,72 @@
         <div class="yuame-container">
             <!-- Hero Section -->
             <section class="yuame-hero">
-                <div class="hero-content">
-                    <h1>YUAME ile Eğitimde Yeni Bir Dönem</h1>
-                    <p>Öğrenciler ve öğretmenler arasında köprü kurarak, herkes için daha iyi bir eğitim deneyimi
-                        sunuyoruz.</p>
-                    <div class="hero-buttons">
-                        <a href="teachers.html" class="hero-btn primary">Öğretmenleri Keşfet</a>
-                        <a href="giris.html" class="hero-btn secondary">Üye Ol</a>
+                <div class="carousel-container">
+                    <div class="carousel-slides">
+                        <div class="carousel-slide fade">
+                            <div class="slide-image">
+                                <img src="img/banner1.png" alt="Banner 1">
+                                <div class="slide-overlay"></div>
+                            </div>
+                            <div class="slide-content">
+                                <div class="content-inner">
+                                    <h1>YUAME ile Eğitimde<br><span class="highlight">Yeni Bir Dönem</span></h1>
+                                    <p>Öğrenciler ve öğretmenler arasında köprü kurarak, herkes için daha iyi bir eğitim
+                                        deneyimi sunuyoruz.</p>
+                                    <div class="hero-buttons">
+                                        <a href="giris.html" class="hero-btn secondary">Üye Ol</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-slide fade">
+                            <div class="slide-image">
+                                <img src="img/banner2.png" alt="Banner 2">
+                                <div class="slide-overlay"></div>
+                            </div>
+                            <div class="slide-content">
+                                <div class="content-inner">
+                                    <h1>Uzman Öğretmenlerle<br><span class="highlight">Birebir Eğitim</span></h1>
+                                    <p>Alanında uzman öğretmenlerimizle kişiselleştirilmiş eğitim deneyimi yaşayın.</p>
+                                    <div class="hero-buttons">
+                                        <a href="teachers.html" class="hero-btn secondary">Öğretmenleri Keşfet</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-slide fade">
+                            <div class="slide-image">
+                                <img src="img/banner3.png" alt="Banner 3">
+                                <div class="slide-overlay"></div>
+                            </div>
+                            <div class="slide-content">
+                                <div class="content-inner">
+                                    <h1>Her Yerden<br><span class="highlight">Erişilebilir Eğitim</span></h1>
+                                    <p>İster evde, ister yolda, dilediğiniz yerden eğitiminize devam edin.</p>
+                                    <div class="hero-buttons">
+                                        <a href="giris.html" class="hero-btn secondary">Üye Ol</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Carousel Navigation -->
+                        <button class="prev" onclick="changeSlide(-1)">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+                            </svg>
+                        </button>
+                        <button class="next" onclick="changeSlide(1)">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z" />
+                            </svg>
+                        </button>
                     </div>
-                </div>
-                <div class="hero-image">
-                    <img src="img/education.svg" alt="Eğitim İllüstrasyonu">
+
+                    <!-- Carousel Progress -->
+                    <div class="carousel-progress">
+                        <div class="progress-bar"></div>
+                    </div>
                 </div>
             </section>
 
@@ -143,10 +228,94 @@
     </main>
 
     <script>
+        // Dark mode functionality
+        const darkModeToggle = document.getElementById('darkModeToggle');
+
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.body.classList.add('dark-mode');
+        }
+
         // Dark mode toggle functionality
-        document.getElementById('darkModeToggle').addEventListener('click', function () {
+        darkModeToggle.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
+
+            // Save preference to localStorage
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+            }
         });
+
+        // Carousel functionality
+        let slideIndex = 1;
+        let slideInterval;
+        const slideDuration = 6000; // 6 seconds per slide
+        let progressBar;
+
+        function initCarousel() {
+            progressBar = document.querySelector('.progress-bar');
+            showSlides(slideIndex);
+            startAutoSlide();
+        }
+
+        function showSlides(n) {
+            let slides = document.getElementsByClassName("carousel-slide");
+
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
+
+            // Remove active class from all slides
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+                slides[i].classList.remove('active');
+            }
+
+            // Show and activate current slide
+            slides[slideIndex - 1].style.display = "block";
+            setTimeout(() => {
+                slides[slideIndex - 1].classList.add('active');
+            }, 100);
+
+            // Reset and start progress bar
+            if (progressBar) {
+                progressBar.style.width = '0%';
+                setTimeout(() => {
+                    progressBar.style.width = '100%';
+                }, 50);
+            }
+        }
+
+        function changeSlide(n) {
+            clearInterval(slideInterval);
+            showSlides(slideIndex += n);
+            startAutoSlide();
+        }
+
+        function startAutoSlide() {
+            // Clear any existing interval
+            if (slideInterval) {
+                clearInterval(slideInterval);
+            }
+
+            // Start new interval
+            slideInterval = setInterval(() => {
+                slideIndex++;
+                showSlides(slideIndex);
+            }, slideDuration);
+        }
+
+        // Initialize carousel when page loads
+        document.addEventListener('DOMContentLoaded', initCarousel);
+
+        // Pause auto-slide on hover
+        document.querySelector('.carousel-container').addEventListener('mouseenter', () => {
+            clearInterval(slideInterval);
+        });
+
+        // Resume auto-slide when mouse leaves
+        document.querySelector('.carousel-container').addEventListener('mouseleave', startAutoSlide);
     </script>
 </body>
 

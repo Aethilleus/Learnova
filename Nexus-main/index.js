@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let currentCaptcha = generateCaptcha();
 
         // Adımlar arası geçiş
-        window.nextStep = function(step) {
+        window.nextStep = function (step) {
             const email = document.getElementById('email').value;
             if (step === 2 && !email) {
                 alert('Lütfen e-posta adresinizi girin');
@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Captcha doğrulama
-        window.verifyCaptcha = function() {
+        window.verifyCaptcha = function () {
             const userInput = document.getElementById('captchaInput').value;
             if (userInput === currentCaptcha) {
                 nextStep(3);
@@ -188,13 +188,13 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // SMS kodu doğrulama
-        window.verifyCode = function() {
+        window.verifyCode = function () {
             const inputs = document.querySelectorAll('.verification-code input');
             let code = '';
             inputs.forEach(input => {
                 code += input.value;
             });
-            
+
             if (code.length === 6) {
                 // Başarılı mesajını göster
                 document.getElementById('successMessage').style.display = 'block';
