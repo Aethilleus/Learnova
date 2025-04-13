@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YUAME - Eğitimde Yeni Bir Dönem</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js"></script>
+</head>
+
+<body>
+    <header class="header">
+        <!-- Logo Alanı -->
+        <div class="logo">
+            <a href="yuame.html">YUAME</a>
+        </div>
+
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="navbar-item"><a href="index.html">Anasayfa</a></div>
+            <div class="navbar-item"><a href="hizmetler.html">Hizmetler</a></div>
+            <div class="navbar-item"><a href="teachers.html">Öğretmenlerimiz</a></div>
+            <div class="navbar-item"><a href="iletisim.html">İletişim</a></div>
+        </nav>
+
+        <!-- Hesap Bölümü -->
+        <div class="account">
+            <a href="giris.html"><button class="account-btn">Giriş Yap</button></a>
+            <a href="giris.html" class="user-icon">
+                <div></div>
+            </a>
+        </div>
+
+        <!-- Dark Mode Toggle Button -->
+        <button class="dark-mode-toggle" id="darkModeToggle">
+            🌓
+        </button>
+    </header>
+
+    <main style="margin-top: 80px;">
+        <div class="yuame-container">
+            <!-- Hero Section -->
+            <section class="yuame-hero">
+                <div class="hero-content">
+                    <h1>YUAME ile Eğitimde Yeni Bir Dönem</h1>
+                    <p>Öğrenciler ve öğretmenler arasında köprü kurarak, herkes için daha iyi bir eğitim deneyimi
+                        sunuyoruz.</p>
+                    <div class="hero-buttons">
+                        <a href="teachers.html" class="hero-btn primary">Öğretmenleri Keşfet</a>
+                        <a href="giris.html" class="hero-btn secondary">Üye Ol</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="img/education.svg" alt="Eğitim İllüstrasyonu">
+                </div>
+            </section>
+
+            <!-- Özellikler Section -->
+            <section class="yuame-features">
+                <h2>Neden YUAME?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">👨‍🏫</div>
+                        <h3>Uzman Öğretmenler</h3>
+                        <p>Alanında uzman öğretmenlerle birebir eğitim fırsatı yakalayın.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📚</div>
+                        <h3>Zengin İçerik</h3>
+                        <p>Her seviyeye uygun, güncel ve interaktif eğitim materyalleri.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💡</div>
+                        <h3>Kişiselleştirilmiş</h3>
+                        <p>Size özel hazırlanmış eğitim programları ve öğrenme deneyimi.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌐</div>
+                        <h3>Her Yerden Erişim</h3>
+                        <p>İstediğiniz zaman, istediğiniz yerden online eğitim imkanı.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dersler Section -->
+            <section class="yuame-courses">
+                <h2>Popüler Derslerimiz</h2>
+                <div class="courses-grid">
+                    <div class="course-card">
+                        <div class="course-image mathematics"></div>
+                        <h3>Matematik</h3>
+                        <p>Temel matematikten ileri düzeye kadar kapsamlı eğitim.</p>
+                        <a href="#" class="course-btn">Detaylar</a>
+                    </div>
+                    <div class="course-card">
+                        <div class="course-image physics"></div>
+                        <h3>Fizik</h3>
+                        <p>Modern fizik ve deneysel uygulamalarla tam öğrenme.</p>
+                        <a href="#" class="course-btn">Detaylar</a>
+                    </div>
+                    <div class="course-card">
+                        <div class="course-image chemistry"></div>
+                        <h3>Kimya</h3>
+                        <p>Teorik ve pratik uygulamalarla kimya eğitimi.</p>
+                        <a href="#" class="course-btn">Detaylar</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- İstatistikler Section -->
+            <section class="yuame-stats">
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-number">1000+</div>
+                        <div class="stat-label">Öğrenci</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Öğretmen</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">15+</div>
+                        <div class="stat-label">Ders</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">4.8</div>
+                        <div class="stat-label">Ortalama Puan</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="yuame-cta">
+                <h2>Eğitim Yolculuğunuza Bugün Başlayın</h2>
+                <p>Size en uygun öğretmeni bulun ve hemen derslere başlayın.</p>
+                <div class="cta-buttons">
+                    <a href="teachers.html" class="cta-btn primary">Öğretmenleri Keşfet</a>
+                    <a href="giris.html" class="cta-btn secondary">Üye Ol</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        // Dark mode toggle functionality
+        document.getElementById('darkModeToggle').addEventListener('click', function () {
+            document.body.classList.toggle('dark-mode');
+        });
+    </script>
+</body>
+
+</html>

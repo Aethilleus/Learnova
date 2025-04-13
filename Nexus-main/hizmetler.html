@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hizmetlerimiz - YUAME</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js"></script>
+</head>
+
+<body>
+    <header class="header">
+        <!-- Logo Alanı -->
+        <div class="logo">
+            <a href="yuame.html">YUAME</a>
+        </div>
+
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="navbar-item"><a href="index.html">Anasayfa</a></div>
+            <div class="navbar-item"><a href="hizmetler.html">Hizmetler</a></div>
+            <div class="navbar-item"><a href="teachers.html">Öğretmenlerimiz</a></div>
+            <div class="navbar-item"><a href="iletisim.html">İletişim</a></div>
+        </nav>
+
+        <!-- Hesap Bölümü -->
+        <div class="account">
+            <button class="account-btn" onclick="window.location.href='giris.html'">Giriş Yap</button>
+            <a href="giris.html" class="user-icon">
+                <div><img src="user.png" alt=""></div>
+            </a>
+        </div>
+
+        <!-- Dark Mode Toggle Button -->
+        <button class="dark-mode-toggle" id="darkModeToggle">
+            <span class="dark-mode-icon">🌓</span>
+        </button>
+    </header>
+
+    <section class="hizmetler">
+        <h1 class="baslik">Hizmetlerimiz</h1>
+
+        <div class="hizmet-kutulari">
+            <div class="kutu">
+                <div class="ikon">📚</div>
+                <h2>Bilgi Paylaşımı</h2>
+                <p>Öğrenciler notlarını paylaşabilir, sorular sorabilir. Paylaşımlar öğretmenler tarafından
+                    onaylanır.
+                </p>
+            </div>
+
+            <div class="kutu">
+                <div class="ikon">🎓</div>
+                <h2>Öğretmen Desteği</h2>
+                <p>Öğretmenler özel ders verebilir, içerik onaylar ve öğrencilere rehberlik eder.</p>
+            </div>
+
+            <div class="kutu">
+                <div class="ikon">💬</div>
+                <h2>Yorum Sistemi</h2>
+                <p>Yorum yaparak etkileşimde bulun, doğru cevaplara ulaş. Topluluk kurallarına dikkat edilir.</p>
+            </div>
+        </div>
+
+        <div class="cta">
+            <h3>Sen de katıl!</h3>
+            <a href="giris.html" class="buton">Hemen Katıl</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-about">
+                <a href="index.html" class="footer-logo">YUAME</a>
+                <p>Eğitimde fırsat eşitliği ve kaliteyi artırmak için çalışıyoruz. Öğrenciler ve öğretmenler arasında
+                    köprü kurarak, herkes için daha iyi bir eğitim deneyimi sunuyoruz.</p>
+                <div class="footer-social">
+                    <a href="#" class="social-icon">
+                        <img src="img/facebook.webp" alt="Facebook">
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="img/twitter.png" alt="Twitter">
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="img/instagram.png" alt="Instagram">
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="img/linkedin.png" alt="LinkedIn">
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Hızlı Bağlantılar</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Anasayfa</a></li>
+                    <li><a href="hizmetler.html">Hizmetler</a></li>
+                    <li><a href="teachers.html">Öğretmenlerimiz</a></li>
+                    <li><a href="iletisim.html">İletişim</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Dersler</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Matematik</a></li>
+                    <li><a href="#">Fizik</a></li>
+                    <li><a href="#">Kimya</a></li>
+                    <li><a href="#">Biyoloji</a></li>
+                    <li><a href="#">İngilizce</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>İletişim</h3>
+                <ul class="footer-contact-info">
+                    <li>Atatürk Caddesi, No: 123, Merkez/İstanbul</li>
+                    <li>+90 (212) 345 67 89</li>
+                    <li>info@yuame.com</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 YUAME. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Dark mode kontrolü ve toggle fonksiyonu
+        document.addEventListener('DOMContentLoaded', function () {
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const body = document.body;
+
+            // Sayfa yüklendiğinde dark mode durumunu kontrol et
+            const isDarkMode = localStorage.getItem('darkMode') === 'enabled';
+            if (isDarkMode) {
+                body.classList.add('dark-mode');
+            }
+
+            // Dark mode toggle butonu tıklama olayı
+            darkModeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
+
+                // Dark mode durumunu localStorage'a kaydet
+                if (body.classList.contains('dark-mode')) {
+                    localStorage.setItem('darkMode', 'enabled');
+                } else {
+                    localStorage.setItem('darkMode', 'disabled');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

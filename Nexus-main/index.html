@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js"></script>
+</head>
+
+<body>
+    <header class="header">
+        <!-- Logo Alanı -->
+        <div class="logo">
+            <a href="yuame.html">YUAME</a>
+        </div>
+
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="navbar-item"><a href="index.html">Anasayfa</a></div>
+            <div class="navbar-item"><a href="hizmetler.html">Hizmetler</a></div>
+            <div class="navbar-item"><a href="teachers.html">Öğretmenlerimiz</a></div>
+            <div class="navbar-item"><a href="iletisim.html">İletişim</a></div>
+        </nav>
+
+        <!-- Hesap Bölümü -->
+        <div class="account">
+            <a href="giris.html"><button class="account-btn">Giriş Yap</button></a>
+            <a href="giris.html" class="user-icon">
+                <div></div>
+            </a>
+        </div>
+
+        <!-- Dark Mode Toggle Button -->
+        <button class="dark-mode-toggle" id="darkModeToggle">
+            🌓
+        </button>
+    </header>
+
+    <!-- Sayfa içeriği buraya gelecek -->
+    <main style="margin-top: 80px;">
+        <div class="main-container">
+            <!-- Sol Menü -->
+            <div class="left-menu">
+                <div class="dropdown">
+                    <button class="dropdown-btn" data-menu="menu1">
+                        <span>Dersler</span>
+                        <i class="arrow">▼</i>
+                    </button>
+                    <div class="dropdown-content" id="menu1">
+                        <div class="nested-dropdown">
+                            <button class="nested-dropdown-btn" data-menu="nested1">
+                                <span>Matematik</span>
+                                <i class="arrow">▼</i>
+                            </button>
+                            <div class="nested-dropdown-content" id="nested1">
+                                <a href="#" class="dropdown-item">Temel Matematik</a>
+                                <a href="#" class="dropdown-item">İleri Matematik</a>
+                                <a href="#" class="dropdown-item">Matematik Olimpiyatları</a>
+                            </div>
+                        </div>
+                        <div class="nested-dropdown">
+                            <button class="nested-dropdown-btn" data-menu="nested2">
+                                <span>Fizik</span>
+                                <i class="arrow">▼</i>
+                            </button>
+                            <div class="nested-dropdown-content" id="nested2">
+                                <a href="#" class="dropdown-item">Temel Fizik</a>
+                                <a href="#" class="dropdown-item">Modern Fizik</a>
+                                <a href="#" class="dropdown-item">Fizik Deneyleri</a>
+                            </div>
+                        </div>
+                        <div class="nested-dropdown">
+                            <button class="nested-dropdown-btn" data-menu="nested3">
+                                <span>Kimya</span>
+                                <i class="arrow">▼</i>
+                            </button>
+                            <div class="nested-dropdown-content" id="nested3">
+                                <a href="#" class="dropdown-item">Genel Kimya</a>
+                                <a href="#" class="dropdown-item">Organik Kimya</a>
+                                <a href="#" class="dropdown-item">Laboratuvar</a>
+                            </div>
+                        </div>
+                        <div class="nested-dropdown">
+                            <button class="nested-dropdown-btn" data-menu="nested4">
+                                <span>Biyoloji</span>
+                                <i class="arrow">▼</i>
+                            </button>
+                            <div class="nested-dropdown-content" id="nested4">
+                                <a href="#" class="dropdown-item">İnsan Anatomisi</a>
+                                <a href="#" class="dropdown-item">Botanik</a>
+                                <a href="#" class="dropdown-item">Mikrobiyoloji</a>
+                            </div>
+                        </div>
+                        <div class="nested-dropdown">
+                            <button class="nested-dropdown-btn" data-menu="nested5">
+                                <span>Bilgisayar</span>
+                                <i class="arrow">▼</i>
+                            </button>
+                            <div class="nested-dropdown-content" id="nested5">
+                                <a href="#" class="dropdown-item">Web Tasarım</a>
+                                <a href="#" class="dropdown-item">Mobil Programlama</a>
+                                <a href="#" class="dropdown-item">Siber Güvenlik</a>
+                            </div>
+                        </div>
+                        <div class="nested-dropdown">
+                            <button class="nested-dropdown-btn" data-menu="nested6">
+                                <span>İngilizce</span>
+                                <i class="arrow">▼</i>
+                            </button>
+                            <div class="nested-dropdown-content" id="nested6">
+                                <a href="#" class="dropdown-item">Başlangıç Seviyesi</a>
+                                <a href="#" class="dropdown-item">Orta Seviye</a>
+                                <a href="#" class="dropdown-item">İleri Seviye</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button class="dropdown-btn" data-menu="menu2">
+                        <span>Soru Cevap</span>
+                        <i class="arrow">▼</i>
+                    </button>
+                    <div class="dropdown-content" id="menu2">
+                        <a href="#" class="dropdown-item">Alt Menü 2.1</a>
+                        <a href="#" class="dropdown-item">Alt Menü 2.2</a>
+                        <a href="#" class="dropdown-item">Alt Menü 2.3</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button class="dropdown-btn" data-menu="menu3">
+                        <span>Topluluklar</span>
+                        <i class="arrow">▼</i>
+                    </button>
+                    <div class="dropdown-content" id="menu3">
+                        <a href="#" class="dropdown-item">Alt Menü 3.1</a>
+                        <a href="#" class="dropdown-item">Alt Menü 3.2</a>
+                        <a href="#" class="dropdown-item">Alt Menü 3.3</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ana İçerik -->
+            <div class="content">
+                <!-- Buraya ana içerik gelecek -->
+            </div>
+
+            <!-- Sağ Menü -->
+            <div class="right-menu">
+                <div class="search-container">
+                    <input type="text" class="search-bar" placeholder="Ara...">
+                </div>
+                <div class="profiles-container">
+                    <!-- Profil kartları buraya gelecek -->
+                    <div class="profile-card">
+                        <div class="profile-image"></div>
+                        <div class="profile-info">
+                            <div class="profile-name">Kullanıcı 1</div>
+                            <div class="profile-status">Çevrimiçi</div>
+                        </div>
+                    </div>
+
+                    <div class="profile-card">
+                        <div class="profile-image"></div>
+                        <div class="profile-info">
+                            <div class="profile-name">Kullanıcı 2</div>
+                            <div class="profile-status">Meşgul</div>
+                        </div>
+                    </div>
+
+                    <div class="profile-card">
+                        <div class="profile-image"></div>
+                        <div class="profile-info">
+                            <div class="profile-name">Kullanıcı 3</div>
+                            <div class="profile-status">Çevrimdışı</div>
+                        </div>
+                    </div>
+
+                    <!-- Diğer profil kartları benzer şekilde devam eder -->
+                    <!-- 4-10 arası profiller için aynı yapıyı tekrarlayın -->
+                </div>
+            </div>
+        </div>
+        <!-- Sayfanızın geri kalanı için içerik -->
+    </main>
+
+    <script>
+        // ... existing code ...
+    </script>
+</body>
+
+</html>
