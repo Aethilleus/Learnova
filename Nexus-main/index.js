@@ -226,3 +226,253 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+// Hesap Sayfası JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+    // Profil fotoğrafı değiştirme
+    const changePhotoBtn = document.querySelector('.change-photo-btn');
+    if (changePhotoBtn) {
+        changePhotoBtn.addEventListener('click', function() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        document.querySelector('.profile-image img').src = event.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            };
+            input.click();
+        });
+    }
+
+    // Düzenleme butonları
+    const editBtns = document.querySelectorAll('.edit-btn');
+    editBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const section = this.closest('section');
+            const infoGroups = section.querySelectorAll('.info-group');
+            
+            infoGroups.forEach(group => {
+                const label = group.querySelector('label').textContent;
+                const text = group.querySelector('p')?.textContent || '';
+                
+                if (group.querySelector('p')) {
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.value = text;
+                    input.className = 'edit-input';
+                    input.style.width = '100%';
+                    input.style.padding = '8px';
+                    input.style.borderRadius = '4px';
+                    input.style.border = '1px solid #ddd';
+                    input.style.marginTop = '5px';
+                    
+                    group.querySelector('p').replaceWith(input);
+                }
+            });
+
+            // Düzenleme butonunu Kaydet butonu ile değiştir
+            const saveBtn = document.createElement('button');
+            saveBtn.textContent = 'Kaydet';
+            saveBtn.className = 'edit-btn save-btn';
+            saveBtn.style.background = '#28a745';
+            saveBtn.style.color = 'white';
+            saveBtn.style.border = 'none';
+            
+            saveBtn.addEventListener('click', function() {
+                infoGroups.forEach(group => {
+                    const input = group.querySelector('.edit-input');
+                    if (input) {
+                        const p = document.createElement('p');
+                        p.textContent = input.value;
+                        input.replaceWith(p);
+                    }
+                });
+                
+                this.replaceWith(btn);
+            });
+            
+            this.replaceWith(saveBtn);
+        });
+    });
+
+    // Telefon ve e-posta ekleme
+    const addPhone = document.querySelector('.add-phone');
+    const addEmail = document.querySelector('.add-email');
+
+    if (addPhone) {
+        addPhone.addEventListener('click', function(e) {
+            e.preventDefault();
+            const input = document.createElement('input');
+            input.type = 'tel';
+            input.placeholder = 'Telefon numarası ekleyin';
+            input.className = 'edit-input';
+            input.style.width = '100%';
+            input.style.padding = '8px';
+            input.style.borderRadius = '4px';
+            input.style.border = '1px solid #ddd';
+            input.style.marginTop = '10px';
+            
+            this.parentElement.insertBefore(input, this);
+        });
+    }
+
+    if (addEmail) {
+        addEmail.addEventListener('click', function(e) {
+            e.preventDefault();
+            const input = document.createElement('input');
+            input.type = 'email';
+            input.placeholder = 'E-posta adresi ekleyin';
+            input.className = 'edit-input';
+            input.style.width = '100%';
+            input.style.padding = '8px';
+            input.style.borderRadius = '4px';
+            input.style.border = '1px solid #ddd';
+            input.style.marginTop = '10px';
+            
+            this.parentElement.insertBefore(input, this);
+        });
+    }
+});
+
+// Güvenlik Sayfası JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+    // Parola görünürlüğünü değiştirme
+    const toggleButtons = document.querySelectorAll('.toggle-password');
+    toggleButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const input = this.parentElement.querySelector('input');
+            const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+            input.setAttribute('type', type);
+            this.querySelector('.eye-icon').textContent = type === 'password' ? '👁️' : '👁️‍🗨️';
+        });
+    });
+
+    // Parola gücü kontrolü
+    const newPasswordInput = document.getElementById('newPassword');
+    if (newPasswordInput) {
+        newPasswordInput.addEventListener('input', function() {
+            const password = this.value;
+            const strengthBar = document.querySelector('.strength-progress');
+            const strengthText = document.querySelector('.strength-text');
+            
+            // Parola gücü kriterleri
+            const hasLower = /[a-z]/.test(password);
+            const hasUpper = /[A-Z]/.test(password);
+            const hasNumber = /\d/.test(password);
+            const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+            const isLongEnough = password.length >= 8;
+            
+            let strength = 0;
+            if (hasLower) strength += 20;
+            if (hasUpper) strength += 20;
+            if (hasNumber) strength += 20;
+            if (hasSpecial) strength += 20;
+            if (isLongEnough) strength += 20;
+            
+            strengthBar.style.width = strength + '%';
+            
+            if (strength <= 40) {
+                strengthBar.style.background = '#ff4444';
+                strengthText.textContent = 'Parola gücü: Zayıf';
+            } else if (strength <= 80) {
+                strengthBar.style.background = '#ffa700';
+                strengthText.textContent = 'Parola gücü: Orta';
+            } else {
+                strengthBar.style.background = '#00c851';
+                strengthText.textContent = 'Parola gücü: Güçlü';
+            }
+        });
+    }
+
+    // Parola değiştirme formu görünürlüğü
+    window.togglePasswordChange = function() {
+        const form = document.getElementById('passwordChangeForm');
+        form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    }
+
+    // Parola değiştirme işlemi
+    window.changePassword = function() {
+        const currentPassword = document.getElementById('currentPassword').value;
+        const newPassword = document.getElementById('newPassword').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+
+        if (!currentPassword || !newPassword || !confirmPassword) {
+            alert('Lütfen tüm alanları doldurun.');
+            return;
+        }
+
+        if (newPassword !== confirmPassword) {
+            alert('Yeni parolalar eşleşmiyor.');
+            return;
+        }
+
+        // Burada parola değiştirme API çağrısı yapılacak
+        alert('Parola başarıyla değiştirildi!');
+        togglePasswordChange();
+    }
+
+    // İki adımlı doğrulama toggle
+    window.toggle2FA = function() {
+        const setup = document.getElementById('twoFactorSetup');
+        const toggle = document.getElementById('twoFactorToggle');
+        
+        if (toggle.checked) {
+            setup.style.display = 'block';
+        } else {
+            if (confirm('İki adımlı doğrulamayı kapatmak istediğinizden emin misiniz?')) {
+                setup.style.display = 'none';
+            } else {
+                toggle.checked = true;
+            }
+        }
+    }
+
+    // Oturum yenileme
+    window.refreshSessions = function() {
+        const refreshBtn = document.querySelector('.refresh-btn');
+        const refreshIcon = refreshBtn.querySelector('.refresh-icon');
+        
+        // Yenileme animasyonu
+        refreshIcon.style.animation = 'spin 1s linear infinite';
+        
+        // API çağrısı simülasyonu
+        setTimeout(() => {
+            refreshIcon.style.animation = '';
+            alert('Oturumlar güncellendi!');
+        }, 1000);
+    }
+
+    // Oturum kapatma
+    const endSessionBtns = document.querySelectorAll('.end-session-btn');
+    endSessionBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const session = this.closest('.session');
+            const isActive = session.classList.contains('active');
+            
+            if (isActive) {
+                if (confirm('Aktif oturumu kapatmak istediğinizden emin misiniz? Bu işlem sizi sistemden çıkaracaktır.')) {
+                    window.location.href = 'giris.html';
+                }
+            } else {
+                session.remove();
+                alert('Oturum başarıyla kapatıldı!');
+            }
+        });
+    });
+});
+
+// Yenileme animasyonu için CSS
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+`;
+document.head.appendChild(style);

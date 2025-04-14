@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gizlilik - YUAME</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js"></script>
+</head>
+
+<body>
+    <header class="header">
+        <!-- Logo Alanı -->
+        <div class="logo">
+            <a href="yuame.html">YUAME</a>
+        </div>
+
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="navbar-item"><a href="index.html">Anasayfa</a></div>
+            <div class="navbar-item"><a href="hizmetler.html">Hizmetler</a></div>
+            <div class="navbar-item"><a href="teachers.html">Öğretmenlerimiz</a></div>
+            <div class="navbar-item"><a href="iletisim.html">İletişim</a></div>
+        </nav>
+
+        <!-- Hesap Bölümü -->
+        <div class="account">
+            <button class="account-btn" onclick="window.location.href='giris.html'">Giriş Yap</button>
+            <a href="giris.html" class="user-icon">
+                <div><img src="user.png" alt=""></div>
+            </a>
+        </div>
+
+        <!-- Dark Mode Toggle Button -->
+        <button class="dark-mode-toggle" id="darkModeToggle">
+            <span class="dark-mode-icon">🌓</span>
+        </button>
+    </header>
+
+    <main class="account-page">
+        <div class="account-container">
+            <!-- Sol Menü -->
+            <div class="account-sidebar">
+                <div class="profile-header">
+                    <div class="profile-image">
+                        <img src="user.png">
+                        <button class="change-photo-btn">Fotoğraf değiştir</button>
+                    </div>
+                    <br><br>
+                    <div class="profile-info">
+                        <h2>Yuame Yuame</h2>
+                        <p>example@gmail.com</p>
+                    </div>
+                </div>
+                <nav class="account-nav">
+                    <a href="hesap.html" class="active">Hesap Bilgileri</a>
+                    <a href="guvenlik.html">Güvenlik</a>
+                    <a href="gizlilik.html">Gizlilik</a>
+                </nav>
+            </div>
+
+            <!-- Ana İçerik -->
+            <div class="account-content">
+                <section class="privacy-section">
+                    <h1 class="section-title">Gizlilik Ayarları</h1>
+
+                    <!-- Profil Görünürlüğü -->
+                    <div class="privacy-card">
+                        <div class="privacy-header">
+                            <h2>Profil Görünürlüğü</h2>
+                            <div class="privacy-options">
+                                <label class="switch">
+                                    <input type="checkbox" id="profileVisibility" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                                <span class="privacy-status">Açık</span>
+                            </div>
+                        </div>
+                        <p class="privacy-desc">Profilinizi diğer kullanıcılara göster</p>
+                    </div>
+
+                    <!-- Veri Toplama -->
+                    <div class="privacy-card">
+                        <div class="privacy-header">
+                            <h2>Veri Toplama</h2>
+                            <div class="privacy-options">
+                                <label class="switch">
+                                    <input type="checkbox" id="dataCollection" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                                <span class="privacy-status">Açık</span>
+                            </div>
+                        </div>
+                        <p class="privacy-desc">Anonim kullanım verilerinin toplanmasına izin ver</p>
+                    </div>
+
+                    <!-- E-posta Bildirimleri -->
+                    <div class="privacy-card">
+                        <div class="privacy-header">
+                            <h2>E-posta Bildirimleri</h2>
+                            <div class="privacy-options">
+                                <label class="switch">
+                                    <input type="checkbox" id="emailNotifications" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                                <span class="privacy-status">Açık</span>
+                            </div>
+                        </div>
+                        <p class="privacy-desc">E-posta ile bildirim al</p>
+                    </div>
+
+                    <!-- Konum Paylaşımı -->
+                    <div class="privacy-card">
+                        <div class="privacy-header">
+                            <h2>Konum Paylaşımı</h2>
+                            <div class="privacy-options">
+                                <label class="switch">
+                                    <input type="checkbox" id="locationSharing">
+                                    <span class="slider round"></span>
+                                </label>
+                                <span class="privacy-status">Kapalı</span>
+                            </div>
+                        </div>
+                        <p class="privacy-desc">Konum bilgilerinizi paylaş</p>
+                    </div>
+
+                    <!-- Veri Silme -->
+                    <div class="privacy-card">
+                        <div class="privacy-header">
+                            <h2>Veri Silme</h2>
+                            <button class="delete-data-btn">Verilerimi Sil</button>
+                        </div>
+                        <p class="privacy-desc">Hesabınızla ilgili tüm verileri kalıcı olarak sil</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html> 

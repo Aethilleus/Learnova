@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Güvenlik - YUAME</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js"></script>
+</head>
+
+<body>
+    <header class="header">
+        <!-- Logo Alanı -->
+        <div class="logo">
+            <a href="yuame.html">YUAME</a>
+        </div>
+
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="navbar-item"><a href="index.html">Anasayfa</a></div>
+            <div class="navbar-item"><a href="hizmetler.html">Hizmetler</a></div>
+            <div class="navbar-item"><a href="teachers.html">Öğretmenlerimiz</a></div>
+            <div class="navbar-item"><a href="iletisim.html">İletişim</a></div>
+        </nav>
+
+        <!-- Hesap Bölümü -->
+        <div class="account">
+            <button class="account-btn" onclick="window.location.href='giris.html'">Giriş Yap</button>
+            <a href="giris.html" class="user-icon">
+                <div><img src="user.png" alt=""></div>
+            </a>
+        </div>
+
+        <!-- Dark Mode Toggle Button -->
+        <button class="dark-mode-toggle" id="darkModeToggle">
+            <span class="dark-mode-icon">🌓</span>
+        </button>
+    </header>
+
+    <main class="account-page">
+        <div class="account-container">
+            <!-- Sol Menü -->
+            <div class="account-sidebar">
+                <div class="profile-header">
+                    <div class="profile-image">
+                        <img src="user.png">
+                        <button class="change-photo-btn">Fotoğraf değiştir</button>
+                    </div>
+                    <br><br>
+                    <div class="profile-info">
+                        <h2>Yuame Yuame</h2>
+                        <p>example@gmail.com</p>
+                    </div>
+                </div>
+                <nav class="account-nav">
+                    <a href="hesap.html" class="active">Hesap Bilgileri</a>
+                    <a href="guvenlik.html">Güvenlik</a>
+                    <a href="gizlilik.html">Gizlilik</a>
+                </nav>
+            </div>
+
+            <!-- Ana İçerik -->
+            <div class="account-content">
+                <section class="security-section">
+                    <h1 class="section-title">Güvenlik Ayarları</h1>
+
+                    <!-- Parola Değiştirme -->
+                    <div class="security-card">
+                        <div class="security-header">
+                            <h2>Parola</h2>
+                            <button class="change-btn" onclick="togglePasswordChange()">Değiştir</button>
+                        </div>
+                        <p class="security-desc">En son parola değişikliği: 3 ay önce</p>
+                        
+                        <div class="password-change-form" id="passwordChangeForm" style="display: none;">
+                            <div class="form-group">
+                                <label>Mevcut Parola</label>
+                                <div class="password-input">
+                                    <input type="password" id="currentPassword">
+                                    <button class="toggle-password" type="button">
+                                        <i class="eye-icon">👁️</i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Yeni Parola</label>
+                                <div class="password-input">
+                                    <input type="password" id="newPassword">
+                                    <button class="toggle-password" type="button">
+                                        <i class="eye-icon">👁️</i>
+                                    </button>
+                                </div>
+                                <div class="password-strength">
+                                    <div class="strength-bar">
+                                        <div class="strength-progress"></div>
+                                    </div>
+                                    <span class="strength-text">Parola gücü: Zayıf</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Yeni Parola (Tekrar)</label>
+                                <div class="password-input">
+                                    <input type="password" id="confirmPassword">
+                                    <button class="toggle-password" type="button">
+                                        <i class="eye-icon">👁️</i>
+                                    </button>
+                                </div>
+                            </div>
+                            <button class="save-btn" onclick="changePassword()">Parolayı Değiştir</button>
+                        </div>
+                    </div>
+
+                    <!-- İki Adımlı Doğrulama -->
+                    <div class="security-card">
+                        <div class="security-header">
+                            <h2>İki Adımlı Doğrulama</h2>
+                            <label class="switch">
+                                <input type="checkbox" id="twoFactorToggle" onchange="toggle2FA()">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <p class="security-desc">Hesabınıza ekstra güvenlik katmanı ekleyin</p>
+                        
+                        <div class="two-factor-setup" id="twoFactorSetup" style="display: none;">
+                            <div class="setup-steps">
+                                <div class="step">
+                                    <h3>1. Authenticator Uygulaması İndirin</h3>
+                                    <p>Google Authenticator veya Microsoft Authenticator uygulamasını indirin.</p>
+                                </div>
+                                <div class="step">
+                                    <h3>2. QR Kodu Tarayın</h3>
+                                    <div class="qr-code">
+                                        <img src="qr-placeholder.png" alt="QR Code">
+                                    </div>
+                                </div>
+                                <div class="step">
+                                    <h3>3. Doğrulama Kodunu Girin</h3>
+                                    <div class="verification-input">
+                                        <input type="text" maxlength="6" placeholder="6 haneli kod">
+                                        <button class="verify-btn">Doğrula</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Oturum Geçmişi -->
+                    <div class="security-card">
+                        <div class="security-header">
+                            <h2>Oturum Geçmişi</h2>
+                            <button class="refresh-btn" onclick="refreshSessions()">
+                                <i class="refresh-icon">🔄</i>
+                            </button>
+                        </div>
+                        <div class="sessions-list">
+                            <div class="session active">
+                                <div class="session-info">
+                                    <i class="device-icon">💻</i>
+                                    <div class="device-details">
+                                        <h4>Windows 10 - Chrome</h4>
+                                        <p>İstanbul, Türkiye • Şu an aktif</p>
+                                    </div>
+                                </div>
+                                <button class="end-session-btn">Oturumu Kapat</button>
+                            </div>
+                            <div class="session">
+                                <div class="session-info">
+                                    <i class="device-icon">📱</i>
+                                    <div class="device-details">
+                                        <h4>iPhone 12 - Safari</h4>
+                                        <p>Son giriş: 2 saat önce</p>
+                                    </div>
+                                </div>
+                                <button class="end-session-btn">Oturumu Kapat</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Güvenlik Günlüğü -->
+                    <div class="security-card">
+                        <div class="security-header">
+                            <h2>Güvenlik Günlüğü</h2>
+                            <button class="view-all-btn">Tümünü Gör</button>
+                        </div>
+                        <div class="security-log">
+                            <div class="log-item">
+                                <i class="log-icon">🔐</i>
+                                <div class="log-details">
+                                    <p class="log-text">Başarılı giriş - Chrome (Windows)</p>
+                                    <span class="log-time">Bugün, 14:30</span>
+                                </div>
+                            </div>
+                            <div class="log-item">
+                                <i class="log-icon">🔄</i>
+                                <div class="log-details">
+                                    <p class="log-text">Parola değiştirildi</p>
+                                    <span class="log-time">3 ay önce</span>
+                                </div>
+                            </div>
+                            <div class="log-item">
+                                <i class="log-icon">⚠️</i>
+                                <div class="log-details">
+                                    <p class="log-text">Başarısız giriş denemesi - Bilinmeyen konum</p>
+                                    <span class="log-time">1 hafta önce</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
