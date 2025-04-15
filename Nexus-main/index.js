@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Dark mode toggle fonksiyonu
     darkModeToggle.addEventListener('click', () => {
         body.classList.toggle('dark-mode');
-
+        
         // Dark mode durumunu localStorage'a kaydet
         if (body.classList.contains('dark-mode')) {
             localStorage.setItem('darkMode', 'enabled');
@@ -419,17 +419,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // İki adımlı doğrulama toggle
     window.toggle2FA = function() {
-        const setup = document.getElementById('twoFactorSetup');
-        const toggle = document.getElementById('twoFactorToggle');
+        const twoFactorSetup = document.getElementById('twoFactorSetup');
+        const twoFactorToggle = document.getElementById('twoFactorToggle');
         
-        if (toggle.checked) {
-            setup.style.display = 'block';
+        if (twoFactorToggle.checked) {
+            twoFactorSetup.style.display = 'block';
+            // Animasyonlu gösterim
+            setTimeout(() => {
+                twoFactorSetup.style.opacity = '1';
+            }, 10);
         } else {
-            if (confirm('İki adımlı doğrulamayı kapatmak istediğinizden emin misiniz?')) {
-                setup.style.display = 'none';
-            } else {
-                toggle.checked = true;
-            }
+            twoFactorSetup.style.opacity = '0';
+            setTimeout(() => {
+                twoFactorSetup.style.display = 'none';
+            }, 300);
         }
     }
 
@@ -476,3 +479,42 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+// Gizlilik sayfası anahtarları kontrolü
+document.addEventListener('DOMContentLoaded', function() {
+    const switches = document.querySelectorAll('.privacy-card input[type="checkbox"]');
+    
+    switches.forEach(switchInput => {
+        // Sayfa yüklendiğinde mevcut durumu kontrol et
+        updateSwitchStatus(switchInput);
+        
+        // Anahtar değiştiğinde durumu güncelle
+        switchInput.addEventListener('change', function() {
+            updateSwitchStatus(this);
+        });
+    });
+});
+
+function updateSwitchStatus(switchInput) {
+    const statusElement = switchInput.closest('.privacy-options').querySelector('.privacy-status');
+    if (switchInput.checked) {
+        statusElement.textContent = 'Açık';
+    } else {
+        statusElement.textContent = 'Kapalı';
+    }
+}
+// Doğrulama Kodu Input Kontrolü
+document.addEventListener('DOMContentLoaded', function() {
+    const verificationInput = document.querySelector('.verification-input input');
+    if (verificationInput) {
+        verificationInput.addEventListener('input', function(e) {
+            // Sadece rakam girişine izin ver
+            this.value = this.value.replace(/[^0-9]/g, '');
+            
+            // 6 haneli kod girildiğinde otomatik doğrulama
+            if (this.value.length === 6) {
+                document.querySelector('.verify-btn').focus();
+            }
+        });
+    }
+});

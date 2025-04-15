@@ -4354,3 +4354,152 @@ input:checked + .slider:before {
 .dark-mode .delete-data-btn:hover {
     background-color: #ff3333;
 }
+
+/* Aktif Menü Stilleri */
+.account-nav a {
+    display: block;
+    padding: 10px 15px;
+    color: #666;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+}
+
+.account-nav a:hover {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.account-nav a.active {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Dark Mode için Aktif Menü Stilleri */
+.dark-mode .account-nav a {
+    color: #ccc;
+}
+
+.dark-mode .account-nav a:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+.dark-mode .account-nav a.active {
+    background-color: #0056b3;
+    color: white;
+}
+
+/* İki Adımlı Doğrulama Stilleri */
+.two-factor-setup {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+}
+
+.setup-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.step {
+    padding: 20px;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.step h3 {
+    margin: 0 0 12px 0;
+    color: #333;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.step h3::before {
+    content: attr(data-step);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 50%;
+    font-size: 14px;
+}
+
+.step p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.qr-code {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    border: 2px dashed #ddd;
+}
+
+.qr-code img {
+    width: 160px;
+    height: 160px;
+}
+
+.verification-input {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.verification-input input {
+    width: 200px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 4px;
+}
+
+.verify-btn {
+    padding: 10px 24px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.verify-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Dark Mode için İki Adımlı Doğrulama Stilleri */
+body.dark-mode .two-factor-setup {
+    background-color: #2d2d2d;
+}
+
+body.dark-mode .step {
+    background-color: #333;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+body.dark-mode .step h3 {
+    color: #fff;
+}
+
+body.dark-mode .step p {
+    color: #b3b3b3;
+}

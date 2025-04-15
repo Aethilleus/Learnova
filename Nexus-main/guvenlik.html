@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Güvenlik - YUAME</title>
     <link rel="stylesheet" href="index.css">
-    <script src="index.js"></script>
 </head>
 
 <body>
+    <script src="index.js"></script>
     <header class="header">
         <!-- Logo Alanı -->
         <div class="logo">
@@ -27,7 +27,7 @@
         <!-- Hesap Bölümü -->
         <div class="account">
             <button class="account-btn" onclick="window.location.href='giris.html'">Giriş Yap</button>
-            <a href="giris.html" class="user-icon">
+            <a href="hesap.html" class="user-icon">
                 <div><img src="user.png" alt=""></div>
             </a>
         </div>
@@ -54,8 +54,8 @@
                     </div>
                 </div>
                 <nav class="account-nav">
-                    <a href="hesap.html" class="active">Hesap Bilgileri</a>
-                    <a href="guvenlik.html">Güvenlik</a>
+                    <a href="hesap.html">Hesap Bilgileri</a>
+                    <a href="guvenlik.html" class="active">Güvenlik</a>
                     <a href="gizlilik.html">Gizlilik</a>
                 </nav>
             </div>
@@ -125,19 +125,18 @@
                         <div class="two-factor-setup" id="twoFactorSetup" style="display: none;">
                             <div class="setup-steps">
                                 <div class="step">
-                                    <h3>1. Authenticator Uygulaması İndirin</h3>
-                                    <p>Google Authenticator veya Microsoft Authenticator uygulamasını indirin.</p>
-                                </div>
-                                <div class="step">
-                                    <h3>2. QR Kodu Tarayın</h3>
-                                    <div class="qr-code">
-                                        <img src="qr-placeholder.png" alt="QR Code">
+                                    <h3 data-step="1">Authenticator Uygulaması İndirin</h3>
+                                    <p>Google Authenticator veya Microsoft Authenticator uygulamasını mobil cihazınıza indirin.</p>
+                                    <div class="app-links">
+                                        <img src="img/google-auth.png" alt="Google Authenticator" style="height: 40px; margin-right: 10px;">
+                                        <img src="img/ms-auth.png" alt="Microsoft Authenticator" style="height: 40px;">
                                     </div>
                                 </div>
                                 <div class="step">
-                                    <h3>3. Doğrulama Kodunu Girin</h3>
+                                    <h3 data-step="2">Doğrulama Kodunu Girin</h3>
+                                    <p>Authenticator uygulamanızda görünen 6 haneli kodu girin.</p>
                                     <div class="verification-input">
-                                        <input type="text" maxlength="6" placeholder="6 haneli kod">
+                                        <input type="text" maxlength="6" placeholder="000000" pattern="[0-9]*" inputmode="numeric">
                                         <button class="verify-btn">Doğrula</button>
                                     </div>
                                 </div>
