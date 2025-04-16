@@ -43,7 +43,7 @@
             <!-- Sol Menü -->
             <div class="account-sidebar">
                 <div class="profile-header">
-                    <div class="profile-image">
+                    <div class="profile-image"">
                         <img src="user.png">
                         <button class="change-photo-btn">Fotoğraf değiştir</button>
                     </div>
@@ -111,6 +111,217 @@
             </div>
         </div>
     </main>
-</body>
+    <script>
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
 
+        // Sayfa yüklendiğinde dark mode durumunu kontrol et
+        const isDarkMode = localStorage.getItem('darkMode') === 'enabled';
+        if (isDarkMode) {
+            body.classList.add('dark-mode');
+        }
+
+        // Dark mode toggle fonksiyonu
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            // Dark mode durumunu localStorage'a kaydet
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                localStorage.setItem('darkMode', null);
+            }
+        });
+
+        // Profil fotoğrafı değiştirme
+        const changePhotoBtn = document.querySelector('.change-photo-btn');
+        if (changePhotoBtn) {
+            changePhotoBtn.addEventListener('click', function() {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = 'image/*';
+                input.onchange = function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(event) {
+                            // Fotoğrafı localStorage'a kaydet
+                            localStorage.setItem('userPhoto', event.target.result);
+                            
+                            // Profil fotoğrafını güncelle (büyük fotoğraf)
+                                document.querySelectorAll('.profile-image img').forEach(img => {
+                                    img.src = event.target.result;
+                                    img.style.width = '150px';
+                                    img.style.height = '150px';
+                                    img.style.objectFit = 'cover';
+                                    img.style.borderRadius = '50%';
+                                });
+
+                                // User icon'unu güncelle (sağ üstteki küçük fotoğraf)
+                                document.querySelectorAll('.user-icon img, .user-photo').forEach(img => {
+                                    img.src = event.target.result;
+                                    img.style.width = '40px';
+                                    img.style.height = '40px';
+                                    img.style.objectFit = 'cover';
+                                    img.style.borderRadius = '50%';
+                                });
+                            };
+                        reader.readAsDataURL(file);
+                    }
+                };
+                input.click();
+            });
+        }
+
+        // Sayfa yüklendiğinde kaydedilmiş fotoğrafı kontrol et
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedPhoto = localStorage.getItem('userPhoto');
+            if (savedPhoto) {
+                // Profil fotoğrafını güncelle (büyük fotoğraf)
+                document.querySelectorAll('.profile-image img').forEach(img => {
+                    img.src = savedPhoto;
+                    img.style.width = '150px';
+                    img.style.height = '150px';
+                    img.style.objectFit = 'cover';
+                    img.style.borderRadius = '50%';
+                });
+
+                // User icon'unu güncelle (sağ üstteki küçük fotoğraf)
+                document.querySelectorAll('.user-icon img, .user-photo').forEach(img => {
+                    img.src = savedPhoto;
+                    img.style.width = '40px';
+                    img.style.height = '40px';
+                    img.style.objectFit = 'cover';
+                    img.style.borderRadius = '50%';
+                });
+            } else {
+                // Varsayılan fotoğrafların boyutlarını ayarla
+                document.querySelectorAll('.profile-image img').forEach(img => {
+                    img.style.width = '150px';
+                    img.style.height = '150px';
+                    img.style.objectFit = 'cover';
+                    img.style.borderRadius = '50%';
+                });
+
+                document.querySelectorAll('.user-icon img, .user-photo').forEach(img => {
+                    img.style.width = '40px';
+                    img.style.height = '40px';
+                    img.style.objectFit = 'cover';
+                    img.style.borderRadius = '50%';
+                });
+            }
+        });
+
+        // Düzenleme butonları
+        const editBtns = document.querySelectorAll('.edit-btn');
+        editBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const section = this.closest('section');
+                const infoGroups = section.querySelectorAll('.info-group');
+                
+                infoGroups.forEach(group => {
+                    const label = group.querySelector('label').textContent;
+                    const text = group.querySelector('p')?.textContent || '';
+                    
+                    if (group.querySelector('p')) {
+                        const input = document.createElement('input');
+                        input.type = 'text';
+                        input.value = text;
+                        input.className = 'edit-input';
+                        input.style.width = '100%';
+                        input.style.padding = '8px';
+                        input.style.borderRadius = '4px';
+                        input.style.border = '1px solid #ddd';
+                        input.style.marginTop = '5px';
+                        
+                        // Dark mode için input stilleri
+                        if (body.classList.contains('dark-mode')) {
+                            input.style.backgroundColor = '#2d2d2d';
+                            input.style.color = '#fff';
+                            input.style.border = '1px solid #444';
+                        }
+                        
+                        group.querySelector('p').replaceWith(input);
+                    }
+                });
+
+                // Düzenleme butonunu Kaydet butonu ile değiştir
+                const saveBtn = document.createElement('button');
+                saveBtn.textContent = 'Kaydet';
+                saveBtn.className = 'edit-btn save-btn';
+                saveBtn.style.background = '#28a745';
+                saveBtn.style.color = 'white';
+                saveBtn.style.border = 'none';
+                
+                saveBtn.addEventListener('click', function() {
+                    infoGroups.forEach(group => {
+                        const input = group.querySelector('.edit-input');
+                        if (input) {
+                            const p = document.createElement('p');
+                            p.textContent = input.value;
+                            input.replaceWith(p);
+                        }
+                    });
+                    
+                    this.replaceWith(btn);
+                });
+                
+                this.replaceWith(saveBtn);
+            });
+        });
+
+        // Telefon ve e-posta ekleme
+        const addPhone = document.querySelector('.add-phone');
+        const addEmail = document.querySelector('.add-email');
+
+        if (addPhone) {
+            addPhone.addEventListener('click', function(e) {
+                e.preventDefault();
+                const input = document.createElement('input');
+                input.type = 'tel';
+                input.placeholder = 'Telefon numarası ekleyin';
+                input.className = 'edit-input';
+                input.style.width = '100%';
+                input.style.padding = '8px';
+                input.style.borderRadius = '4px';
+                input.style.border = '1px solid #ddd';
+                input.style.marginTop = '10px';
+                
+                // Dark mode için input stilleri
+                if (body.classList.contains('dark-mode')) {
+                    input.style.backgroundColor = '#2d2d2d';
+                    input.style.color = '#fff';
+                    input.style.border = '1px solid #444';
+                }
+                
+                this.parentElement.insertBefore(input, this);
+            });
+        }
+
+        if (addEmail) {
+            addEmail.addEventListener('click', function(e) {
+                e.preventDefault();
+                const input = document.createElement('input');
+                input.type = 'email';
+                input.placeholder = 'E-posta adresi ekleyin';
+                input.className = 'edit-input';
+                input.style.width = '100%';
+                input.style.padding = '8px';
+                input.style.borderRadius = '4px';
+                input.style.border = '1px solid #ddd';
+                input.style.marginTop = '10px';
+                
+                // Dark mode için input stilleri
+                if (body.classList.contains('dark-mode')) {
+                    input.style.backgroundColor = '#2d2d2d';
+                    input.style.color = '#fff';
+                    input.style.border = '1px solid #444';
+                }
+                
+                this.parentElement.insertBefore(input, this);
+            });
+        }
+    </script>
+</body>
 </html>

@@ -138,6 +138,68 @@
             </div>
         </div>
     </main>
+    <script>
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+
+        // Sayfa yüklendiğinde dark mode durumunu kontrol et
+        const isDarkMode = localStorage.getItem('darkMode') === 'enabled';
+        if (isDarkMode) {
+            body.classList.add('dark-mode');
+        }
+
+        // Dark mode toggle fonksiyonu
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            // Dark mode durumunu localStorage'a kaydet
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                localStorage.setItem('darkMode', null);
+            }
+        });
+
+        // Sayfa yüklendiğinde kaydedilmiş fotoğrafı kontrol et
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedPhoto = localStorage.getItem('userPhoto');
+            if (savedPhoto) {
+                // Profil fotoğrafını güncelle (büyük fotoğraf)
+                document.querySelectorAll('.profile-image img').forEach(img => {
+                    img.src = savedPhoto;
+                    img.style.width = '150px';
+                    img.style.height = '150px';
+                    img.style.objectFit = 'cover';
+                    img.style.borderRadius = '50%';
+                });
+
+                // User icon'unu güncelle (sağ üstteki küçük fotoğraf)
+                document.querySelectorAll('.user-icon img, .user-photo').forEach(img => {
+                    img.src = savedPhoto;
+                    img.style.width = '40px';
+                    img.style.height = '40px';
+                    img.style.objectFit = 'cover';
+                    img.style.borderRadius = '100%';
+                });
+            } else {
+                // Varsayılan fotoğrafların boyutlarını ayarla
+                document.querySelectorAll('.profile-image img').forEach(img => {
+                    img.style.width = '150px';
+                    img.style.height = '150px';
+                    img.style.objectFit = 'cover';
+                    img.style.borderRadius = '50%';
+                });
+
+                document.querySelectorAll('.user-icon img, .user-photo').forEach(img => {
+                    img.style.width = '40px';
+                    img.style.height = '40px';
+                    img.style.objectFit = 'cover';
+                    img.style.borderRadius = '100%';
+                });
+            }
+        });
+    </script>
 </body>
 
 </html> 

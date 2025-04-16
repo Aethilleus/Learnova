@@ -112,7 +112,7 @@
                     </div>
 
                     <!-- İki Adımlı Doğrulama -->
-                    <div class="security-card">
+                    <div class="security-card" >
                         <div class="security-header">
                             <h2>İki Adımlı Doğrulama</h2>
                             <label class="switch">
@@ -123,21 +123,21 @@
                         <p class="security-desc">Hesabınıza ekstra güvenlik katmanı ekleyin</p>
                         
                         <div class="two-factor-setup" id="twoFactorSetup" style="display: none;">
-                            <div class="setup-steps">
+                            <div class="setup-steps" style="margin-left: 120px;">
                                 <div class="step">
                                     <h3 data-step="1">Authenticator Uygulaması İndirin</h3>
                                     <p>Google Authenticator veya Microsoft Authenticator uygulamasını mobil cihazınıza indirin.</p>
-                                    <div class="app-links">
-                                        <img src="img/google-auth.png" alt="Google Authenticator" style="height: 40px; margin-right: 10px;">
-                                        <img src="img/ms-auth.png" alt="Microsoft Authenticator" style="height: 40px;">
+                                    <div class="app-links" style="margin-left: 45px;">
+                                        <img src="img/google-auth.png" alt="Google Authenticator" style="height: 40px; ">
+                                        <img src="img/ms-auth.png" alt="Microsoft Authenticator" style="height: 40px; margin-right: 45px;">
                                     </div>
                                 </div>
-                                <div class="step">
+                                <div class="step" style="margin-left: 100px; margin-top: 30px;">
                                     <h3 data-step="2">Doğrulama Kodunu Girin</h3>
-                                    <p>Authenticator uygulamanızda görünen 6 haneli kodu girin.</p>
+                                    <p style="margin-left: 15px;">Authenticator uygulamanızda görünen 6 haneli kodu girin.</p>
                                     <div class="verification-input">
-                                        <input type="text" maxlength="6" placeholder="000000" pattern="[0-9]*" inputmode="numeric">
-                                        <button class="verify-btn">Doğrula</button>
+                                        <input type="text" maxlength="6" placeholder="000000" pattern="[0-9]*" inputmode="numeric" style="margin-left: 20px;">
+                                        <button class="verify-btn" style="margin-left: 10px;">Doğrula</button>
                                     </div>
                                 </div>
                             </div>
@@ -210,6 +210,68 @@
             </div>
         </div>
     </main>
+    <script>
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+
+        // Sayfa yüklendiğinde dark mode durumunu kontrol et
+        const isDarkMode = localStorage.getItem('darkMode') === 'enabled';
+        if (isDarkMode) {
+            body.classList.add('dark-mode');
+        }
+
+        // Dark mode toggle fonksiyonu
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            // Dark mode durumunu localStorage'a kaydet
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                localStorage.setItem('darkMode', null);
+            }
+        });
+
+        // Sayfa yüklendiğinde kaydedilmiş fotoğrafı kontrol et
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedPhoto = localStorage.getItem('userPhoto');
+            if (savedPhoto) {
+                // Profil fotoğrafını güncelle (büyük fotoğraf)
+                document.querySelectorAll('.profile-image img').forEach(img => {
+                    img.src = savedPhoto;
+                    img.style.width = '150px';
+                    img.style.height = '150px';
+                    img.style.objectFit = 'cover';
+                    img.style.borderRadius = '50%';
+                });
+
+                // User icon'unu güncelle (sağ üstteki küçük fotoğraf)
+                document.querySelectorAll('.user-icon img, .user-photo').forEach(img => {
+                    img.src = savedPhoto;
+                    img.style.width = '40px';
+                    img.style.height = '40px';
+                    img.style.objectFit = 'cover';
+                    img.style.borderRadius = '100%';
+                });
+            } else {
+                // Varsayılan fotoğrafların boyutlarını ayarla
+                document.querySelectorAll('.profile-image img').forEach(img => {
+                    img.style.width = '150px';
+                    img.style.height = '150px';
+                    img.style.objectFit = 'cover';
+                    img.style.borderRadius = '50%';
+                });
+
+                document.querySelectorAll('.user-icon img, .user-photo').forEach(img => {
+                    img.style.width = '40px';
+                    img.style.height = '40px';
+                    img.style.objectFit = 'cover';
+                    img.style.borderRadius = '100%';
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

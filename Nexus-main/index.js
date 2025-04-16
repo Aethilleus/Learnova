@@ -227,119 +227,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-// Hesap Sayfası JavaScript
-document.addEventListener('DOMContentLoaded', function() {
-    // Profil fotoğrafı değiştirme
-    const changePhotoBtn = document.querySelector('.change-photo-btn');
-    if (changePhotoBtn) {
-        changePhotoBtn.addEventListener('click', function() {
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = 'image/*';
-            input.onchange = function(e) {
-                const file = e.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(event) {
-                        document.querySelector('.profile-image img').src = event.target.result;
-                    };
-                    reader.readAsDataURL(file);
-                }
-            };
-            input.click();
-        });
-    }
-
-    // Düzenleme butonları
-    const editBtns = document.querySelectorAll('.edit-btn');
-    editBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const section = this.closest('section');
-            const infoGroups = section.querySelectorAll('.info-group');
-            
-            infoGroups.forEach(group => {
-                const label = group.querySelector('label').textContent;
-                const text = group.querySelector('p')?.textContent || '';
-                
-                if (group.querySelector('p')) {
-                    const input = document.createElement('input');
-                    input.type = 'text';
-                    input.value = text;
-                    input.className = 'edit-input';
-                    input.style.width = '100%';
-                    input.style.padding = '8px';
-                    input.style.borderRadius = '4px';
-                    input.style.border = '1px solid #ddd';
-                    input.style.marginTop = '5px';
-                    
-                    group.querySelector('p').replaceWith(input);
-                }
-            });
-
-            // Düzenleme butonunu Kaydet butonu ile değiştir
-            const saveBtn = document.createElement('button');
-            saveBtn.textContent = 'Kaydet';
-            saveBtn.className = 'edit-btn save-btn';
-            saveBtn.style.background = '#28a745';
-            saveBtn.style.color = 'white';
-            saveBtn.style.border = 'none';
-            
-            saveBtn.addEventListener('click', function() {
-                infoGroups.forEach(group => {
-                    const input = group.querySelector('.edit-input');
-                    if (input) {
-                        const p = document.createElement('p');
-                        p.textContent = input.value;
-                        input.replaceWith(p);
-                    }
-                });
-                
-                this.replaceWith(btn);
-            });
-            
-            this.replaceWith(saveBtn);
-        });
-    });
-
-    // Telefon ve e-posta ekleme
-    const addPhone = document.querySelector('.add-phone');
-    const addEmail = document.querySelector('.add-email');
-
-    if (addPhone) {
-        addPhone.addEventListener('click', function(e) {
-            e.preventDefault();
-            const input = document.createElement('input');
-            input.type = 'tel';
-            input.placeholder = 'Telefon numarası ekleyin';
-            input.className = 'edit-input';
-            input.style.width = '100%';
-            input.style.padding = '8px';
-            input.style.borderRadius = '4px';
-            input.style.border = '1px solid #ddd';
-            input.style.marginTop = '10px';
-            
-            this.parentElement.insertBefore(input, this);
-        });
-    }
-
-    if (addEmail) {
-        addEmail.addEventListener('click', function(e) {
-            e.preventDefault();
-            const input = document.createElement('input');
-            input.type = 'email';
-            input.placeholder = 'E-posta adresi ekleyin';
-            input.className = 'edit-input';
-            input.style.width = '100%';
-            input.style.padding = '8px';
-            input.style.borderRadius = '4px';
-            input.style.border = '1px solid #ddd';
-            input.style.marginTop = '10px';
-            
-            this.parentElement.insertBefore(input, this);
-        });
-    }
-});
-
 // Güvenlik Sayfası JavaScript
 document.addEventListener('DOMContentLoaded', function() {
     // Parola görünürlüğünü değiştirme
@@ -503,6 +390,7 @@ function updateSwitchStatus(switchInput) {
         statusElement.textContent = 'Kapalı';
     }
 }
+
 // Doğrulama Kodu Input Kontrolü
 document.addEventListener('DOMContentLoaded', function() {
     const verificationInput = document.querySelector('.verification-input input');
