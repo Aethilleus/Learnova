@@ -154,7 +154,7 @@ body {
     cursor: pointer;
     margin-right: 15px;
     transition: 0.3s;
-    
+
 }
 
 
@@ -3772,7 +3772,8 @@ body.dark-mode.login-page {
     margin: 0;
 }
 
-.add-phone, .add-email {
+.add-phone,
+.add-email {
     color: #007bff;
     text-decoration: none;
     font-size: 0.9em;
@@ -3780,7 +3781,8 @@ body.dark-mode.login-page {
     margin-top: 10px;
 }
 
-.add-phone:hover, .add-email:hover {
+.add-phone:hover,
+.add-email:hover {
     text-decoration: underline;
 }
 
@@ -4036,11 +4038,11 @@ body.dark-mode.login-page {
     border-radius: 50%;
 }
 
-input:checked + .slider {
+input:checked+.slider {
     background-color: #007bff;
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
     transform: translateX(26px);
 }
 
@@ -4409,7 +4411,7 @@ input:checked + .slider:before {
     padding: 20px;
     border-radius: 8px;
     background-color: white;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .step h3 {
@@ -4494,7 +4496,7 @@ body.dark-mode .two-factor-setup {
 
 body.dark-mode .step {
     background-color: #333;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 body.dark-mode .step h3 {
@@ -4503,4 +4505,136 @@ body.dark-mode .step h3 {
 
 body.dark-mode .step p {
     color: #b3b3b3;
+}
+
+.trending-topics {
+    font-family: 'Trifelia', sans-serif;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.dark-mode .trending-topics {
+    background-color: #2d2d2d;
+    color: #fff;
+}
+
+.trending-topics h3 {
+    font-family: 'Trifelia', sans-serif !important;
+    font-size: 1.2em;
+    margin-bottom: 25px;
+    padding-bottom: 25px;
+    color: #333;
+    font-weight: bold;
+    text-transform: none;
+    letter-spacing: normal;
+    line-height: 1.4;
+    border-bottom: 5px solid #eee;
+}
+
+.dark-mode .trending-topics h3 {
+    color: #fff;
+    border-bottom: 1px solid #333;
+}
+
+.topic-item {
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border-bottom: 1px solid #eff3f4;
+}
+
+.dark-mode .topic-item {
+    border-bottom: 1px solid #333;
+}
+
+.topic-item:hover {
+    background-color: #f0f2f5;
+}
+
+.dark-mode .topic-item:hover {
+    background-color: #2a2a2a;
+}
+
+.topic-category {
+    font-size: 13px;
+    color: #536471;
+    margin-bottom: 4px;
+}
+
+.dark-mode .topic-category {
+    color: #b3b3b3;
+}
+
+.topic-title {
+    font-family: 'Trifelia', sans-serif;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.dark-mode .topic-title {
+    color: #fff;
+}
+
+.topic-stats {
+    font-family: 'Trifelia', sans-serif;
+    font-size: 0.8em;
+    color: #888;
+}
+
+.dark-mode .topic-stats {
+    color: #999;
+}
+
+.right-menu {
+    position: sticky;
+    top: 80px;
+}
+
+.search-container {
+    position: sticky;
+    top: 0;
+    padding: 12px 0;
+    z-index: 1;
+}
+
+.search-bar {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 20px;
+    border: 1px solid #e1e8ed;
+    background-color: #f7f9f9;
+    font-size: 15px;
+}
+
+.dark-mode .search-bar {
+    background-color: #2a2a2a;
+    border-color: #333;
+    color: #fff;
+}
+
+.search-bar:focus {
+    outline: none;
+    border-color: #1da1f2;
+    background-color: white;
+}
+
+.dark-mode .search-bar:focus {
+    background-color: #2a2a2a;
+    border-color: #1da1f2;
+}
+
+.dark-mode .search-bar::placeholder {
+    color: #b3b3b3;
+}
+
+/* Sağ menüdeki tüm yazılar için */
+.right-menu * {
+    font-family: 'Trifelia', sans-serif !important;
+}
+
+.topic-item:first-child {
+    margin-top: 10px;
 }
