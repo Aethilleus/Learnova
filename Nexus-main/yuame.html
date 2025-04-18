@@ -5,9 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YUAME - Eğitimde Yeni Bir Dönem</title>
-    <link rel="stylesheet" href="index.css">
-    <script src="index.js"></script>
     <style>
+        /* Font styles */
         body {
             font-family: 'Trifelia', sans-serif !important;
         }
@@ -26,7 +25,6 @@
             font-family: 'Trifelia', sans-serif !important;
         }
 
-        /* Navbar için cluxy yazı tipi */
         .navbar,
         .navbar a {
             font-family: 'cluxy', sans-serif !important;
@@ -37,6 +35,16 @@
             font-family: 'cluxy', sans-serif !important;
         }
     </style>
+    <script>
+        // Dark mode check before page load
+        (function () {
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js"></script>
 </head>
 
 <body>
@@ -193,28 +201,6 @@
                 </div>
             </section>
 
-            <!-- İstatistikler Section -->
-            <section class="yuame-stats">
-                <div class="stats-container">
-                    <div class="stat-item">
-                        <div class="stat-number">1000+</div>
-                        <div class="stat-label">Öğrenci</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">50+</div>
-                        <div class="stat-label">Öğretmen</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">15+</div>
-                        <div class="stat-label">Ders</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">4.8</div>
-                        <div class="stat-label">Ortalama Puan</div>
-                    </div>
-                </div>
-            </section>
-
             <!-- CTA Section -->
             <section class="yuame-cta">
                 <h2>Eğitim Yolculuğunuza Bugün Başlayın</h2>
@@ -226,6 +212,59 @@
             </section>
         </div>
     </main>
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-about">
+                <a href="index.html" class="footer-logo">YUAME</a>
+                <p>Eğitimde fırsat eşitliği ve kaliteyi artırmak için çalışıyoruz. Öğrenciler ve öğretmenler arasında
+                    köprü kurarak, herkes için daha iyi bir eğitim deneyimi sunuyoruz.</p>
+                <div class="footer-social">
+                    <a href="#" class="social-icon">
+                        <img src="img/facebook.webp" alt="Facebook">
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="img/twitter.png" alt="Twitter">
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="img/instagram.png" alt="Instagram">
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Hızlı Bağlantılar</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Anasayfa</a></li>
+                    <li><a href="hizmetler.html">Hizmetler</a></li>
+                    <li><a href="teachers.html">Öğretmenlerimiz</a></li>
+                    <li><a href="iletisim.html">İletişim</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Dersler</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Matematik</a></li>
+                    <li><a href="#">Fizik</a></li>
+                    <li><a href="#">Kimya</a></li>
+                    <li><a href="#">Biyoloji</a></li>
+                    <li><a href="#">İngilizce</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>İletişim</h3>
+                <ul class="footer-contact-info">
+                    <li>+90 (212) 345 67 89</li>
+                    <li>info@yuame.com</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 YUAME. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
 
     <script>
         // Dark mode functionality

@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Dark mode toggle fonksiyonu
     darkModeToggle.addEventListener('click', () => {
         body.classList.toggle('dark-mode');
-        
+
         // Dark mode durumunu localStorage'a kaydet
         if (body.classList.contains('dark-mode')) {
             localStorage.setItem('darkMode', 'enabled');
@@ -228,11 +228,11 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // Güvenlik Sayfası JavaScript
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Parola görünürlüğünü değiştirme
     const toggleButtons = document.querySelectorAll('.toggle-password');
     toggleButtons.forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             const input = this.parentElement.querySelector('input');
             const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
             input.setAttribute('type', type);
@@ -243,27 +243,27 @@ document.addEventListener('DOMContentLoaded', function() {
     // Parola gücü kontrolü
     const newPasswordInput = document.getElementById('newPassword');
     if (newPasswordInput) {
-        newPasswordInput.addEventListener('input', function() {
+        newPasswordInput.addEventListener('input', function () {
             const password = this.value;
             const strengthBar = document.querySelector('.strength-progress');
             const strengthText = document.querySelector('.strength-text');
-            
+
             // Parola gücü kriterleri
             const hasLower = /[a-z]/.test(password);
             const hasUpper = /[A-Z]/.test(password);
             const hasNumber = /\d/.test(password);
             const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(password);
             const isLongEnough = password.length >= 8;
-            
+
             let strength = 0;
             if (hasLower) strength += 20;
             if (hasUpper) strength += 20;
             if (hasNumber) strength += 20;
             if (hasSpecial) strength += 20;
             if (isLongEnough) strength += 20;
-            
+
             strengthBar.style.width = strength + '%';
-            
+
             if (strength <= 40) {
                 strengthBar.style.background = '#ff4444';
                 strengthText.textContent = 'Parola gücü: Zayıf';
@@ -278,13 +278,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Parola değiştirme formu görünürlüğü
-    window.togglePasswordChange = function() {
+    window.togglePasswordChange = function () {
         const form = document.getElementById('passwordChangeForm');
         form.style.display = form.style.display === 'none' ? 'block' : 'none';
     }
 
     // Parola değiştirme işlemi
-    window.changePassword = function() {
+    window.changePassword = function () {
         const currentPassword = document.getElementById('currentPassword').value;
         const newPassword = document.getElementById('newPassword').value;
         const confirmPassword = document.getElementById('confirmPassword').value;
@@ -305,10 +305,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // İki adımlı doğrulama toggle
-    window.toggle2FA = function() {
+    window.toggle2FA = function () {
         const twoFactorSetup = document.getElementById('twoFactorSetup');
         const twoFactorToggle = document.getElementById('twoFactorToggle');
-        
+
         if (twoFactorToggle.checked) {
             twoFactorSetup.style.display = 'block';
             // Animasyonlu gösterim
@@ -324,13 +324,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Oturum yenileme
-    window.refreshSessions = function() {
+    window.refreshSessions = function () {
         const refreshBtn = document.querySelector('.refresh-btn');
         const refreshIcon = refreshBtn.querySelector('.refresh-icon');
-        
+
         // Yenileme animasyonu
         refreshIcon.style.animation = 'spin 1s linear infinite';
-        
+
         // API çağrısı simülasyonu
         setTimeout(() => {
             refreshIcon.style.animation = '';
@@ -341,10 +341,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Oturum kapatma
     const endSessionBtns = document.querySelectorAll('.end-session-btn');
     endSessionBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function () {
             const session = this.closest('.session');
             const isActive = session.classList.contains('active');
-            
+
             if (isActive) {
                 if (confirm('Aktif oturumu kapatmak istediğinizden emin misiniz? Bu işlem sizi sistemden çıkaracaktır.')) {
                     window.location.href = 'giris.html';
@@ -368,15 +368,15 @@ style.textContent = `
 document.head.appendChild(style);
 
 // Gizlilik sayfası anahtarları kontrolü
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const switches = document.querySelectorAll('.privacy-card input[type="checkbox"]');
-    
+
     switches.forEach(switchInput => {
         // Sayfa yüklendiğinde mevcut durumu kontrol et
         updateSwitchStatus(switchInput);
-        
+
         // Anahtar değiştiğinde durumu güncelle
-        switchInput.addEventListener('change', function() {
+        switchInput.addEventListener('change', function () {
             updateSwitchStatus(this);
         });
     });
@@ -392,13 +392,13 @@ function updateSwitchStatus(switchInput) {
 }
 
 // Doğrulama Kodu Input Kontrolü
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const verificationInput = document.querySelector('.verification-input input');
     if (verificationInput) {
-        verificationInput.addEventListener('input', function(e) {
+        verificationInput.addEventListener('input', function (e) {
             // Sadece rakam girişine izin ver
             this.value = this.value.replace(/[^0-9]/g, '');
-            
+
             // 6 haneli kod girildiğinde otomatik doğrulama
             if (this.value.length === 6) {
                 document.querySelector('.verify-btn').focus();
@@ -406,3 +406,95 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// Dark mode functionality
+document.addEventListener('DOMContentLoaded', function () {
+    // Check for saved dark mode preference
+    if (localStorage.getItem('darkMode') === 'enabled') {
+        document.documentElement.classList.add('dark-mode');
+    }
+
+    // Dark mode toggle functionality
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark-mode');
+
+            // Save preference to localStorage
+            if (document.documentElement.classList.contains('dark-mode')) {
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        });
+    }
+});
+
+// Carousel functionality
+let slideIndex = 1;
+let slideInterval;
+const slideDuration = 6000; // 6 seconds per slide
+let progressBar;
+
+function initCarousel() {
+    progressBar = document.querySelector('.progress-bar');
+    showSlides(slideIndex);
+    startAutoSlide();
+}
+
+function showSlides(n) {
+    let slides = document.getElementsByClassName("carousel-slide");
+
+    if (n > slides.length) { slideIndex = 1 }
+    if (n < 1) { slideIndex = slides.length }
+
+    // Remove active class from all slides
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+        slides[i].classList.remove('active');
+    }
+
+    // Show and activate current slide
+    slides[slideIndex - 1].style.display = "block";
+    setTimeout(() => {
+        slides[slideIndex - 1].classList.add('active');
+    }, 100);
+
+    // Reset and start progress bar
+    if (progressBar) {
+        progressBar.style.width = '0%';
+        setTimeout(() => {
+            progressBar.style.width = '100%';
+        }, 50);
+    }
+}
+
+function changeSlide(n) {
+    clearInterval(slideInterval);
+    showSlides(slideIndex += n);
+    startAutoSlide();
+}
+
+function startAutoSlide() {
+    // Clear any existing interval
+    if (slideInterval) {
+        clearInterval(slideInterval);
+    }
+
+    // Start new interval
+    slideInterval = setInterval(() => {
+        slideIndex++;
+        showSlides(slideIndex);
+    }, slideDuration);
+}
+
+// Initialize carousel when page loads
+document.addEventListener('DOMContentLoaded', initCarousel);
+
+// Pause auto-slide on hover
+document.querySelector('.carousel-container')?.addEventListener('mouseenter', () => {
+    clearInterval(slideInterval);
+});
+
+// Resume auto-slide when mouse leaves
+document.querySelector('.carousel-container')?.addEventListener('mouseleave', startAutoSlide);

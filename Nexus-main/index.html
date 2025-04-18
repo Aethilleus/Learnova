@@ -8,6 +8,14 @@
     <link rel="stylesheet" href="index.css">
     <script src="index.js"></script>
 </head>
+<script>
+    // Dark mode check before page load
+    (function () {
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.documentElement.classList.add('dark-mode');
+        }
+    })();
+</script>
 
 <body>
     <header class="header">

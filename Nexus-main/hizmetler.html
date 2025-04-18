@@ -5,6 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hizmetlerimiz - YUAME</title>
+    <script>
+        // Dark mode check before page load
+        (function () {
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
     <link rel="stylesheet" href="index.css">
     <script src="index.js"></script>
 </head>
@@ -26,7 +34,7 @@
 
         <!-- Hesap Bölümü -->
         <div class="account">
-            <button class="account-btn" onclick="window.location.href='giris.html'">Giriş Yap</button>
+            <a href="giris.html"><button class="account-btn">Giriş Yap</button></a>
             <a href="hesap.html" class="user-icon">
                 <div><img src="user.png" alt=""></div>
             </a>
@@ -85,9 +93,6 @@
                     <a href="#" class="social-icon">
                         <img src="img/instagram.png" alt="Instagram">
                     </a>
-                    <a href="#" class="social-icon">
-                        <img src="img/linkedin.png" alt="LinkedIn">
-                    </a>
                 </div>
             </div>
 
@@ -115,7 +120,6 @@
             <div class="footer-section">
                 <h3>İletişim</h3>
                 <ul class="footer-contact-info">
-                    <li>Atatürk Caddesi, No: 123, Merkez/İstanbul</li>
                     <li>+90 (212) 345 67 89</li>
                     <li>info@yuame.com</li>
                 </ul>

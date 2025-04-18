@@ -8,6 +8,14 @@
     <link rel="stylesheet" href="index.css">
     <script src="index.js"></script>
 </head>
+<script>
+    // Dark mode check before page load
+    (function () {
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.documentElement.classList.add('dark-mode');
+        }
+    })();
+</script>
 
 <body>
     <header class="header">
@@ -26,7 +34,7 @@
 
         <!-- Hesap Bölümü -->
         <div class="account">
-            <button class="account-btn" onclick="window.location.href='giris.html'">Giriş Yap</button>
+            <a href="giris.html"><button class="account-btn">Giriş Yap</button></a>
             <a href="hesap.html" class="user-icon">
                 <div><img src="user.png" alt=""></div>
             </a>
@@ -48,24 +56,25 @@
                 <div class="info-items">
                     <div class="info-item">
                         <div>
-                            <h3>Adres</h3>
-                            <p>Atatürk Caddesi, No: 123<br>Merkez/İstanbul</p>
-                        </div>
-                    </div>
-
-                    <div class="info-item">
-                        <div>
                             <h3>Telefon</h3>
                             <p>+90 (212) 345 67 89</p>
                             <p>+90 (532) 123 45 67</p>
                         </div>
                     </div>
-
                     <div class="info-item">
                         <div>
                             <h3>E-posta</h3>
                             <p>info@yuame.com</p>
                             <p>destek@yuame.com</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div>
+                            <h3>Hakkımızda</h3>
+                            <p>Geliştirdiğimiz platform, sadece bir not paylaşım alanı değil; aynı zamanda öğrencilerin
+                                birbirleriyle etkileşim kurabildiği, uzman öğretmenlerden canlı destek alabildiği ve
+                                topluluklar aracılığıyla bilgi paylaşımını teşvik eden bir ekosistem sunuyor. Bu, mevcut
+                                platformlardan farklı olarak daha bütünsel bir öğrenme deneyimi sağlıyor.</p>
                         </div>
                     </div>
                 </div>
@@ -127,9 +136,6 @@
                     <a href="#" class="social-icon">
                         <img src="img/instagram.png" alt="Instagram">
                     </a>
-                    <a href="#" class="social-icon">
-                        <img src="img/linkedin.png" alt="LinkedIn">
-                    </a>
                 </div>
             </div>
 
@@ -157,7 +163,6 @@
             <div class="footer-section">
                 <h3>İletişim</h3>
                 <ul class="footer-contact-info">
-                    <li>Atatürk Caddesi, No: 123, Merkez/İstanbul</li>
                     <li>+90 (212) 345 67 89</li>
                     <li>info@yuame.com</li>
                 </ul>

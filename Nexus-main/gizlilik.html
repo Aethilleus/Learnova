@@ -6,8 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gizlilik - YUAME</title>
     <link rel="stylesheet" href="index.css">
-    
+
 </head>
+<script>
+    // Dark mode check before page load
+    (function () {
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.documentElement.classList.add('dark-mode');
+        }
+    })();
+</script>
 
 <body>
     <script src="index.js"></script>
@@ -27,7 +35,7 @@
 
         <!-- Hesap Bölümü -->
         <div class="account">
-            <button class="account-btn" onclick="window.location.href='giris.html'">Giriş Yap</button>
+            <a href="giris.html"><button class="account-btn">Giriş Yap</button></a>
             <a href="hesap.html" class="user-icon">
                 <div><img src="user.png" alt=""></div>
             </a>
@@ -152,7 +160,7 @@
         // Dark mode toggle fonksiyonu
         darkModeToggle.addEventListener('click', () => {
             body.classList.toggle('dark-mode');
-            
+
             // Dark mode durumunu localStorage'a kaydet
             if (body.classList.contains('dark-mode')) {
                 localStorage.setItem('darkMode', 'enabled');
@@ -162,7 +170,7 @@
         });
 
         // Sayfa yüklendiğinde kaydedilmiş fotoğrafı kontrol et
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const savedPhoto = localStorage.getItem('userPhoto');
             if (savedPhoto) {
                 // Profil fotoğrafını güncelle (büyük fotoğraf)
@@ -202,4 +210,4 @@
     </script>
 </body>
 
-</html> 
+</html>
