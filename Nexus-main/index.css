@@ -16,6 +16,15 @@
     font-display: block;
 }
 
+@font-face {
+    font-family: 'Mars';
+    src: url('fonts/Mars.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+
 /* Fontu kullanmak için */
 body {
     font-family: 'cluxy', sans-serif;
@@ -55,7 +64,8 @@ body {
 }
 
 .logo {
-    width: 80px;
+    width: 50px;
+    font-family: 'Mars', sans-serif;
 }
 
 .logo a {
@@ -63,16 +73,15 @@ body {
     height: auto;
     text-decoration: none;
     color: #333;
-    font-weight: 500;
-    font-size: 50px;
-    transition: 0.5s;
+    font-weight: 50;
+    font-size: 30px;
+    transition: 1.0s;
 }
 
 .logo a:hover {
     color: #007bff;
-
-    font-size: 51px;
-    transition: 0.5s ease;
+    font-size: 31px;
+    transition: 1.0s ease;
 }
 
 .navbar {
