@@ -34,9 +34,9 @@
 
         <!-- Hesap Bölümü -->
         <div class="account">
-            <a href="giris.html"><button class="account-btn">Giriş Yap</button></a>
+            <a href="giris.html" class="login-button"><button class="account-btn">Giriş Yap</button></a>
             <a href="hesap.html" class="user-icon">
-                <div><img src="user.png" alt=""></div>
+                <div><img id="navProfileImg" src="user.png" alt="Profil"></div>
             </a>
         </div>
 
@@ -51,8 +51,8 @@
             <!-- Sol Menü -->
             <div class="account-sidebar">
                 <div class="profile-header">
-                    <div class="profile-image"">
-                        <img src=" user.png">
+                    <div class="profile-image">
+                        <img id="profileImg" src="user.png" alt="Profil">
                         <button class="change-photo-btn">Fotoğraf değiştir</button>
                     </div>
                     <br><br>
@@ -156,24 +156,18 @@
                         reader.onload = function (event) {
                             // Fotoğrafı localStorage'a kaydet
                             localStorage.setItem('userPhoto', event.target.result);
+                            // Kullanıcı giriş yapmış olarak işaretle
+                            localStorage.setItem('isLoggedIn', 'true');
 
-                            // Profil fotoğrafını güncelle (büyük fotoğraf)
-                            document.querySelectorAll('.profile-image img').forEach(img => {
-                                img.src = event.target.result;
-                                img.style.width = '150px';
-                                img.style.height = '150px';
-                                img.style.objectFit = 'cover';
-                                img.style.borderRadius = '50%';
-                            });
+                            // Profil fotoğrafını güncelle
+                            document.getElementById('profileImg').src = event.target.result;
 
-                            // User icon'unu güncelle (sağ üstteki küçük fotoğraf)
-                            document.querySelectorAll('.user-icon img, .user-photo').forEach(img => {
-                                img.src = event.target.result;
-                                img.style.width = '40px';
-                                img.style.height = '40px';
-                                img.style.objectFit = 'cover';
-                                img.style.borderRadius = '50%';
-                            });
+                            // Navbar'daki kullanıcı ikonunu da güncelle
+                            document.getElementById('navProfileImg').src = event.target.result;
+                            document.querySelector('.user-icon').classList.add('has-profile');
+
+                            // Giriş yap butonunu gizle
+                            document.querySelector('.login-button').style.display = 'none';
                         };
                         reader.readAsDataURL(file);
                     }
@@ -182,42 +176,25 @@
             });
         }
 
-        // Sayfa yüklendiğinde kaydedilmiş fotoğrafı kontrol et
+        // Sayfa yüklendiğinde kaydedilmiş fotoğrafı ve giriş durumunu kontrol et
         document.addEventListener('DOMContentLoaded', function () {
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
             const savedPhoto = localStorage.getItem('userPhoto');
-            if (savedPhoto) {
-                // Profil fotoğrafını güncelle (büyük fotoğraf)
-                document.querySelectorAll('.profile-image img').forEach(img => {
-                    img.src = savedPhoto;
-                    img.style.width = '150px';
-                    img.style.height = '150px';
-                    img.style.objectFit = 'cover';
-                    img.style.borderRadius = '50%';
-                });
 
-                // User icon'unu güncelle (sağ üstteki küçük fotoğraf)
-                document.querySelectorAll('.user-icon img, .user-photo').forEach(img => {
-                    img.src = savedPhoto;
-                    img.style.width = '40px';
-                    img.style.height = '40px';
-                    img.style.objectFit = 'cover';
-                    img.style.borderRadius = '50%';
-                });
-            } else {
-                // Varsayılan fotoğrafların boyutlarını ayarla
-                document.querySelectorAll('.profile-image img').forEach(img => {
-                    img.style.width = '150px';
-                    img.style.height = '150px';
-                    img.style.objectFit = 'cover';
-                    img.style.borderRadius = '50%';
-                });
+            if (isLoggedIn && savedPhoto) {
+                // Giriş yap butonunu gizle
+                document.querySelector('.login-button').style.display = 'none';
 
-                document.querySelectorAll('.user-icon img, .user-photo').forEach(img => {
-                    img.style.width = '40px';
-                    img.style.height = '40px';
-                    img.style.objectFit = 'cover';
-                    img.style.borderRadius = '50%';
-                });
+                // Profil fotoğrafını güncelle
+                if (document.getElementById('profileImg')) {
+                    document.getElementById('profileImg').src = savedPhoto;
+                }
+
+                // Navbar'daki kullanıcı ikonunu da güncelle
+                if (document.getElementById('navProfileImg')) {
+                    document.getElementById('navProfileImg').src = savedPhoto;
+                    document.querySelector('.user-icon').classList.add('has-profile');
+                }
             }
         });
 

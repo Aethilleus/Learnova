@@ -26,9 +26,9 @@
 
         <!-- Hesap Bölümü -->
         <div class="account">
-            <a href="giris.html"><button class="account-btn">Giriş Yap</button></a>
+            <a href="giris.html" class="login-button"><button class="account-btn">Giriş Yap</button></a>
             <a href="hesap.html" class="user-icon">
-                <div><img src="user.png" alt=""></div>
+                <div><img id="navProfileImg" src="user.png" alt="Profil"></div>
             </a>
         </div>
 
@@ -39,7 +39,7 @@
     </header>
 
     <div class="wrapper">
-        <form action="">
+        <form action="" id="loginForm">
             <h1>Giriş Yap</h1>
             <div class="input-box">
                 <input type="text" required placeholder="Kullanıcı Adı">
@@ -80,6 +80,38 @@
                     localStorage.setItem('darkMode', 'disabled');
                 }
             });
+
+            // Profil fotoğrafını kontrol et ve giriş durumunu kontrol et
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            const savedPhoto = localStorage.getItem('userPhoto');
+
+            if (isLoggedIn && savedPhoto) {
+                // Giriş yap butonunu gizle
+                document.querySelector('.login-button').style.display = 'none';
+
+                // Navbar'daki kullanıcı ikonunu güncelle
+                document.getElementById('navProfileImg').src = savedPhoto;
+                document.querySelector('.user-icon').classList.add('has-profile');
+            }
+
+            // Login form işlemi
+            const loginForm = document.getElementById('loginForm');
+            if (loginForm) {
+                loginForm.addEventListener('submit', function (e) {
+                    e.preventDefault();
+
+                    // Başarılı giriş durumunda localStorage'a kaydet
+                    localStorage.setItem('isLoggedIn', 'true');
+
+                    // Varsayılan profil fotoğrafı yoksa varsayılan profil fotoğrafını kaydet
+                    if (!localStorage.getItem('userPhoto')) {
+                        localStorage.setItem('userPhoto', 'user.png');
+                    }
+
+                    // Hesap sayfasına yönlendir
+                    window.location.href = 'hesap.html';
+                });
+            }
         });
     </script>
 </body>

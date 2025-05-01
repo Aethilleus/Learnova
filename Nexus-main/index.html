@@ -34,9 +34,9 @@
 
         <!-- Hesap Bölümü -->
         <div class="account">
-            <a href="giris.html"><button class="account-btn">Giriş Yap</button></a>
+            <a href="giris.html" class="login-button"><button class="account-btn">Giriş Yap</button></a>
             <a href="hesap.html" class="user-icon">
-                <div></div>
+                <div><img id="navProfileImg" src="user.png" alt="Profil"></div>
             </a>
         </div>
 
@@ -193,7 +193,62 @@
     </main>
 
     <script>
-        // ... existing code ...
+        document.addEventListener('DOMContentLoaded', function () {
+            // Dropdown menü işlevselliği
+            const dropdownBtns = document.querySelectorAll('.dropdown-btn, .nested-dropdown-btn');
+
+            dropdownBtns.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const menuId = this.getAttribute('data-menu');
+                    const dropdownContent = document.getElementById(menuId);
+
+                    // Toggle active class
+                    this.classList.toggle('active');
+
+                    // Toggle show class
+                    if (dropdownContent) {
+                        dropdownContent.classList.toggle('show');
+                    }
+                });
+            });
+
+            // Dark mode toggle
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const body = document.body;
+
+            // Check dark mode state on page load
+            const isDarkMode = localStorage.getItem('darkMode') === 'enabled';
+            if (isDarkMode) {
+                body.classList.add('dark-mode');
+            }
+
+            // Dark mode toggle function
+            darkModeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
+
+                // Save dark mode state
+                if (body.classList.contains('dark-mode')) {
+                    localStorage.setItem('darkMode', 'enabled');
+                } else {
+                    localStorage.setItem('darkMode', null);
+                }
+            });
+
+            // Giriş durumunu ve profil fotoğrafını kontrol et
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            const savedPhoto = localStorage.getItem('userPhoto');
+
+            if (isLoggedIn) {
+                // Giriş yap butonunu gizle
+                document.querySelector('.login-button').style.display = 'none';
+
+                // Profil fotoğrafını göster
+                if (savedPhoto) {
+                    document.getElementById('navProfileImg').src = savedPhoto;
+                    document.querySelector('.user-icon').classList.add('has-profile');
+                }
+            }
+        });
     </script>
 </body>
 

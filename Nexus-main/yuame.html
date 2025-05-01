@@ -64,9 +64,9 @@
 
         <!-- Hesap Bölümü -->
         <div class="account">
-            <a href="giris.html"><button class="account-btn">Giriş Yap</button></a>
+            <a href="giris.html" class="login-button"><button class="account-btn">Giriş Yap</button></a>
             <a href="hesap.html" class="user-icon">
-                <div></div>
+                <div><img id="navProfileImg" src="user.png" alt="Profil"></div>
             </a>
         </div>
 
@@ -288,73 +288,61 @@
         });
 
         // Carousel functionality
-        let slideIndex = 1;
-        let slideInterval;
-        const slideDuration = 6000; // 6 seconds per slide
-        let progressBar;
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const progressBar = document.querySelector('.progress-bar');
+        let slideTimer;
 
-        function initCarousel() {
-            progressBar = document.querySelector('.progress-bar');
-            showSlides(slideIndex);
-            startAutoSlide();
+        // Show the first slide
+        showSlides();
+
+        function changeSlide(n) {
+            clearTimeout(slideTimer);
+            slideIndex += n;
+            showSlides();
         }
 
-        function showSlides(n) {
-            let slides = document.getElementsByClassName("carousel-slide");
+        function showSlides() {
+            if (slideIndex >= slides.length) { slideIndex = 0; }
+            if (slideIndex < 0) { slideIndex = slides.length - 1; }
 
-            if (n > slides.length) { slideIndex = 1 }
-            if (n < 1) { slideIndex = slides.length }
-
-            // Remove active class from all slides
+            // Hide all slides
             for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
                 slides[i].classList.remove('active');
             }
 
-            // Show and activate current slide
-            slides[slideIndex - 1].style.display = "block";
-            setTimeout(() => {
-                slides[slideIndex - 1].classList.add('active');
-            }, 100);
+            // Show the current slide
+            slides[slideIndex].classList.add('active');
 
-            // Reset and start progress bar
-            if (progressBar) {
-                progressBar.style.width = '0%';
-                setTimeout(() => {
-                    progressBar.style.width = '100%';
-                }, 50);
-            }
-        }
+            // Reset and start the progress bar animation
+            progressBar.style.animation = 'none';
+            progressBar.offsetHeight; // Trigger reflow
+            progressBar.style.animation = 'progressBarAnimation 5s linear';
 
-        function changeSlide(n) {
-            clearInterval(slideInterval);
-            showSlides(slideIndex += n);
-            startAutoSlide();
-        }
-
-        function startAutoSlide() {
-            // Clear any existing interval
-            if (slideInterval) {
-                clearInterval(slideInterval);
-            }
-
-            // Start new interval
-            slideInterval = setInterval(() => {
+            // Change slide every 5 seconds
+            slideTimer = setTimeout(() => {
                 slideIndex++;
-                showSlides(slideIndex);
-            }, slideDuration);
+                showSlides();
+            }, 5000);
         }
 
         // Initialize carousel when page loads
-        document.addEventListener('DOMContentLoaded', initCarousel);
+        document.addEventListener('DOMContentLoaded', function () {
+            // Giriş durumunu ve profil fotoğrafını kontrol et
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            const savedPhoto = localStorage.getItem('userPhoto');
 
-        // Pause auto-slide on hover
-        document.querySelector('.carousel-container').addEventListener('mouseenter', () => {
-            clearInterval(slideInterval);
+            if (isLoggedIn) {
+                // Giriş yap butonunu gizle
+                document.querySelector('.login-button').style.display = 'none';
+
+                // Profil fotoğrafını göster
+                if (savedPhoto) {
+                    document.getElementById('navProfileImg').src = savedPhoto;
+                    document.querySelector('.user-icon').classList.add('has-profile');
+                }
+            }
         });
-
-        // Resume auto-slide when mouse leaves
-        document.querySelector('.carousel-container').addEventListener('mouseleave', startAutoSlide);
     </script>
 </body>
 
