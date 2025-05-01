@@ -60,6 +60,31 @@
     <script>
         // Dark mode kontrolü ve toggle fonksiyonu
         document.addEventListener('DOMContentLoaded', function () {
+            // UI güncelleme fonksiyonu
+            function updateUIBasedOnLoginState() {
+                const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+                const savedPhoto = localStorage.getItem('userPhoto');
+                const accountSection = document.querySelector('.account');
+
+                if (isLoggedIn) {
+                    // Giriş yap butonunu gizle
+                    document.querySelector('.login-button').style.display = 'none';
+
+                    // Navbar'daki kullanıcı ikonunu güncelle
+                    if (savedPhoto) {
+                        document.getElementById('navProfileImg').src = savedPhoto;
+                        document.querySelector('.user-icon').classList.add('has-profile');
+                    }
+
+                    // Kullanıcı zaten giriş yapmışsa, hesap sayfasına yönlendir
+                    window.location.href = 'hesap.html';
+                    return;
+                }
+
+                // UI'ın yüklenmesini tamamla
+                accountSection.classList.add('loaded');
+            }
+
             const darkModeToggle = document.getElementById('darkModeToggle');
             const body = document.body;
 
@@ -81,18 +106,8 @@
                 }
             });
 
-            // Profil fotoğrafını kontrol et ve giriş durumunu kontrol et
-            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-            const savedPhoto = localStorage.getItem('userPhoto');
-
-            if (isLoggedIn && savedPhoto) {
-                // Giriş yap butonunu gizle
-                document.querySelector('.login-button').style.display = 'none';
-
-                // Navbar'daki kullanıcı ikonunu güncelle
-                document.getElementById('navProfileImg').src = savedPhoto;
-                document.querySelector('.user-icon').classList.add('has-profile');
-            }
+            // UI'ı güncelle
+            updateUIBasedOnLoginState();
 
             // Login form işlemi
             const loginForm = document.getElementById('loginForm');

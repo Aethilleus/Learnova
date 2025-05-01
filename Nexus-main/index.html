@@ -194,6 +194,27 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // Oturum durumunu kontrol eden ve UI'ı güncelleyen fonksiyon
+            function updateUIBasedOnLoginState() {
+                const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+                const savedPhoto = localStorage.getItem('userPhoto');
+                const accountSection = document.querySelector('.account');
+
+                if (isLoggedIn) {
+                    // Giriş yap butonunu gizle
+                    document.querySelector('.login-button').style.display = 'none';
+
+                    // Profil fotoğrafını göster
+                    if (savedPhoto) {
+                        document.getElementById('navProfileImg').src = savedPhoto;
+                        document.querySelector('.user-icon').classList.add('has-profile');
+                    }
+                }
+
+                // UI'ın yüklenmesini tamamla
+                accountSection.classList.add('loaded');
+            }
+
             // Dropdown menü işlevselliği
             const dropdownBtns = document.querySelectorAll('.dropdown-btn, .nested-dropdown-btn');
 
@@ -234,20 +255,8 @@
                 }
             });
 
-            // Giriş durumunu ve profil fotoğrafını kontrol et
-            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-            const savedPhoto = localStorage.getItem('userPhoto');
-
-            if (isLoggedIn) {
-                // Giriş yap butonunu gizle
-                document.querySelector('.login-button').style.display = 'none';
-
-                // Profil fotoğrafını göster
-                if (savedPhoto) {
-                    document.getElementById('navProfileImg').src = savedPhoto;
-                    document.querySelector('.user-icon').classList.add('has-profile');
-                }
-            }
+            // Oturum durumunu kontrol et ve UI'ı güncelle
+            updateUIBasedOnLoginState();
         });
     </script>
 </body>

@@ -124,6 +124,14 @@ body {
     align-items: center;
     gap: 1rem;
     margin-top: -5px;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.account.loaded {
+    visibility: visible;
+    opacity: 1;
 }
 
 .account-btn {
@@ -4693,4 +4701,67 @@ body.dark-mode .step p {
 
 .topic-item:first-child {
     margin-top: 10px;
+}
+
+.account-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.account-nav a {
+    padding: 12px 15px;
+    color: #333;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.account-nav a:hover {
+    background: #f0f7ff;
+    color: #007bff;
+}
+
+.account-nav a.active {
+    background: #007bff;
+    color: white;
+}
+
+.logout-btn {
+    width: 100%;
+    padding: 12px 15px;
+    margin-top: 20px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    display: block;
+}
+
+.logout-btn:hover {
+    background-color: #c82333;
+}
+
+.dark-mode .account-nav a {
+    color: #fff;
+}
+
+.dark-mode .account-nav a:hover {
+    background: rgba(0, 123, 255, 0.1);
+}
+
+.dark-mode .account-nav a.active {
+    background: #007bff;
+}
+
+.dark-mode .logout-btn {
+    background-color: #bd2130;
+}
+
+.dark-mode .logout-btn:hover {
+    background-color: #a71d2a;
 }

@@ -6,6 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hesabım - Leornova</title>
     <link rel="stylesheet" href="index.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Trifielia&display=swap');
+
+        .info-card label,
+        .info-card p,
+        .add-phone,
+        .add-email {
+            font-family: 'Trifielia', sans-serif;
+            font-size: 0.95em;
+        }
+    </style>
     <script src="index.js"></script>
 </head>
 <script>
@@ -15,6 +26,14 @@
             document.documentElement.classList.add('dark-mode');
         }
     })();
+
+    // Giriş durumunu kontrol et
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+    // Eğer giriş yapılmamışsa, giriş sayfasına yönlendir
+    if (!isLoggedIn) {
+        window.location.href = 'giris.html';
+    }
 </script>
 
 <body>
@@ -65,6 +84,7 @@
                     <a href="hesap.html" class="active">Hesap Bilgileri</a>
                     <a href="guvenlik.html">Güvenlik</a>
                     <a href="gizlilik.html">Gizlilik</a>
+                    <button class="logout-btn" id="logoutBtn">Çıkış Yap</button>
                 </nav>
             </div>
 
@@ -142,6 +162,21 @@
             }
         });
 
+        // Çıkış yapma fonksiyonu
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function () {
+                // Kullanıcı oturumunu sonlandır
+                localStorage.removeItem('isLoggedIn');
+
+                // Profil fotoğrafını temizle (isteğe bağlı)
+                // localStorage.removeItem('userPhoto');
+
+                // Anasayfaya yönlendir
+                window.location.href = 'index.html';
+            });
+        }
+
         // Profil fotoğrafı değiştirme
         const changePhotoBtn = document.querySelector('.change-photo-btn');
         if (changePhotoBtn) {
@@ -178,135 +213,151 @@
 
         // Sayfa yüklendiğinde kaydedilmiş fotoğrafı ve giriş durumunu kontrol et
         document.addEventListener('DOMContentLoaded', function () {
-            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-            const savedPhoto = localStorage.getItem('userPhoto');
+            // UI güncelleme fonksiyonu
+            function updateUIBasedOnLoginState() {
+                const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+                const savedPhoto = localStorage.getItem('userPhoto');
+                const accountSection = document.querySelector('.account');
 
-            if (isLoggedIn && savedPhoto) {
-                // Giriş yap butonunu gizle
-                document.querySelector('.login-button').style.display = 'none';
-
-                // Profil fotoğrafını güncelle
-                if (document.getElementById('profileImg')) {
-                    document.getElementById('profileImg').src = savedPhoto;
+                // Giriş yapılmamışsa giriş sayfasına yönlendir
+                if (!isLoggedIn) {
+                    window.location.href = 'giris.html';
+                    return;
                 }
 
-                // Navbar'daki kullanıcı ikonunu da güncelle
-                if (document.getElementById('navProfileImg')) {
-                    document.getElementById('navProfileImg').src = savedPhoto;
-                    document.querySelector('.user-icon').classList.add('has-profile');
-                }
-            }
-        });
+                if (isLoggedIn) {
+                    // Giriş yap butonunu gizle
+                    document.querySelector('.login-button').style.display = 'none';
 
-        // Düzenleme butonları
-        const editBtns = document.querySelectorAll('.edit-btn');
-        editBtns.forEach(btn => {
-            btn.addEventListener('click', function () {
-                const section = this.closest('section');
-                const infoGroups = section.querySelectorAll('.info-group');
-
-                infoGroups.forEach(group => {
-                    const label = group.querySelector('label').textContent;
-                    const text = group.querySelector('p')?.textContent || '';
-
-                    if (group.querySelector('p')) {
-                        const input = document.createElement('input');
-                        input.type = 'text';
-                        input.value = text;
-                        input.className = 'edit-input';
-                        input.style.width = '100%';
-                        input.style.padding = '8px';
-                        input.style.borderRadius = '4px';
-                        input.style.border = '1px solid #ddd';
-                        input.style.marginTop = '5px';
-
-                        // Dark mode için input stilleri
-                        if (body.classList.contains('dark-mode')) {
-                            input.style.backgroundColor = '#2d2d2d';
-                            input.style.color = '#fff';
-                            input.style.border = '1px solid #444';
-                        }
-
-                        group.querySelector('p').replaceWith(input);
+                    // Profil fotoğrafını güncelle
+                    if (document.getElementById('profileImg') && savedPhoto) {
+                        document.getElementById('profileImg').src = savedPhoto;
                     }
-                });
 
-                // Düzenleme butonunu Kaydet butonu ile değiştir
-                const saveBtn = document.createElement('button');
-                saveBtn.textContent = 'Kaydet';
-                saveBtn.className = 'edit-btn save-btn';
-                saveBtn.style.background = '#28a745';
-                saveBtn.style.color = 'white';
-                saveBtn.style.border = 'none';
+                    // Navbar'daki kullanıcı ikonunu da güncelle
+                    if (document.getElementById('navProfileImg') && savedPhoto) {
+                        document.getElementById('navProfileImg').src = savedPhoto;
+                        document.querySelector('.user-icon').classList.add('has-profile');
+                    }
+                }
 
-                saveBtn.addEventListener('click', function () {
+                // UI'ın yüklenmesini tamamla
+                accountSection.classList.add('loaded');
+            }
+
+            // UI'ı güncelle
+            updateUIBasedOnLoginState();
+
+            // Düzenleme butonları
+            const editBtns = document.querySelectorAll('.edit-btn');
+            editBtns.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const section = this.closest('section');
+                    const infoGroups = section.querySelectorAll('.info-group');
+
                     infoGroups.forEach(group => {
-                        const input = group.querySelector('.edit-input');
-                        if (input) {
-                            const p = document.createElement('p');
-                            p.textContent = input.value;
-                            input.replaceWith(p);
+                        const label = group.querySelector('label').textContent;
+                        const text = group.querySelector('p')?.textContent || '';
+
+                        if (group.querySelector('p')) {
+                            const input = document.createElement('input');
+                            input.type = 'text';
+                            input.value = text;
+                            input.className = 'edit-input';
+                            input.style.width = '100%';
+                            input.style.padding = '8px';
+                            input.style.borderRadius = '4px';
+                            input.style.border = '1px solid #ddd';
+                            input.style.marginTop = '5px';
+
+                            // Dark mode için input stilleri
+                            if (body.classList.contains('dark-mode')) {
+                                input.style.backgroundColor = '#2d2d2d';
+                                input.style.color = '#fff';
+                                input.style.border = '1px solid #444';
+                            }
+
+                            group.querySelector('p').replaceWith(input);
                         }
                     });
 
-                    this.replaceWith(btn);
+                    // Düzenleme butonunu Kaydet butonu ile değiştir
+                    const saveBtn = document.createElement('button');
+                    saveBtn.textContent = 'Kaydet';
+                    saveBtn.className = 'edit-btn save-btn';
+                    saveBtn.style.background = '#28a745';
+                    saveBtn.style.color = 'white';
+                    saveBtn.style.border = 'none';
+
+                    saveBtn.addEventListener('click', function () {
+                        infoGroups.forEach(group => {
+                            const input = group.querySelector('.edit-input');
+                            if (input) {
+                                const p = document.createElement('p');
+                                p.textContent = input.value;
+                                input.replaceWith(p);
+                            }
+                        });
+
+                        this.replaceWith(btn);
+                    });
+
+                    this.replaceWith(saveBtn);
                 });
-
-                this.replaceWith(saveBtn);
             });
+
+            // Telefon ve e-posta ekleme
+            const addPhone = document.querySelector('.add-phone');
+            const addEmail = document.querySelector('.add-email');
+
+            if (addPhone) {
+                addPhone.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const input = document.createElement('input');
+                    input.type = 'tel';
+                    input.placeholder = 'Telefon numarası ekleyin';
+                    input.className = 'edit-input';
+                    input.style.width = '100%';
+                    input.style.padding = '8px';
+                    input.style.borderRadius = '4px';
+                    input.style.border = '1px solid #ddd';
+                    input.style.marginTop = '10px';
+
+                    // Dark mode için input stilleri
+                    if (body.classList.contains('dark-mode')) {
+                        input.style.backgroundColor = '#2d2d2d';
+                        input.style.color = '#fff';
+                        input.style.border = '1px solid #444';
+                    }
+
+                    this.parentElement.insertBefore(input, this);
+                });
+            }
+
+            if (addEmail) {
+                addEmail.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const input = document.createElement('input');
+                    input.type = 'email';
+                    input.placeholder = 'E-posta adresi ekleyin';
+                    input.className = 'edit-input';
+                    input.style.width = '100%';
+                    input.style.padding = '8px';
+                    input.style.borderRadius = '4px';
+                    input.style.border = '1px solid #ddd';
+                    input.style.marginTop = '10px';
+
+                    // Dark mode için input stilleri
+                    if (body.classList.contains('dark-mode')) {
+                        input.style.backgroundColor = '#2d2d2d';
+                        input.style.color = '#fff';
+                        input.style.border = '1px solid #444';
+                    }
+
+                    this.parentElement.insertBefore(input, this);
+                });
+            }
         });
-
-        // Telefon ve e-posta ekleme
-        const addPhone = document.querySelector('.add-phone');
-        const addEmail = document.querySelector('.add-email');
-
-        if (addPhone) {
-            addPhone.addEventListener('click', function (e) {
-                e.preventDefault();
-                const input = document.createElement('input');
-                input.type = 'tel';
-                input.placeholder = 'Telefon numarası ekleyin';
-                input.className = 'edit-input';
-                input.style.width = '100%';
-                input.style.padding = '8px';
-                input.style.borderRadius = '4px';
-                input.style.border = '1px solid #ddd';
-                input.style.marginTop = '10px';
-
-                // Dark mode için input stilleri
-                if (body.classList.contains('dark-mode')) {
-                    input.style.backgroundColor = '#2d2d2d';
-                    input.style.color = '#fff';
-                    input.style.border = '1px solid #444';
-                }
-
-                this.parentElement.insertBefore(input, this);
-            });
-        }
-
-        if (addEmail) {
-            addEmail.addEventListener('click', function (e) {
-                e.preventDefault();
-                const input = document.createElement('input');
-                input.type = 'email';
-                input.placeholder = 'E-posta adresi ekleyin';
-                input.className = 'edit-input';
-                input.style.width = '100%';
-                input.style.padding = '8px';
-                input.style.borderRadius = '4px';
-                input.style.border = '1px solid #ddd';
-                input.style.marginTop = '10px';
-
-                // Dark mode için input stilleri
-                if (body.classList.contains('dark-mode')) {
-                    input.style.backgroundColor = '#2d2d2d';
-                    input.style.color = '#fff';
-                    input.style.border = '1px solid #444';
-                }
-
-                this.parentElement.insertBefore(input, this);
-            });
-        }
     </script>
 </body>
 
