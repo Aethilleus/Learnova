@@ -34,6 +34,25 @@
         .logo a {
             font-family: 'Mars', sans-serif !important;
         }
+
+        /* Fix for profile photo consistency */
+        .user-icon img {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .account {
+            display: flex;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .account.loaded {
+            opacity: 1;
+        }
     </style>
     <script>
         // Dark mode check before page load
@@ -288,23 +307,41 @@
         });
 
         // Carousel functionality
-        let slideIndex = 0;
-        const slides = document.querySelectorAll('.carousel-slide');
-        const progressBar = document.querySelector('.progress-bar');
-        let slideTimer;
+        let slideIndex = 1;
+        let slideInterval;
 
-        // Show the first slide
-        showSlides();
+        document.addEventListener('DOMContentLoaded', function () {
+            showSlides(slideIndex);
+            startAutoSlide();
 
-        function changeSlide(n) {
-            clearTimeout(slideTimer);
-            slideIndex += n;
-            showSlides();
-        }
+            // Check and update profile photo
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            const savedPhoto = localStorage.getItem('userPhoto');
+            const accountSection = document.querySelector('.account');
 
-        function showSlides() {
-            if (slideIndex >= slides.length) { slideIndex = 0; }
-            if (slideIndex < 0) { slideIndex = slides.length - 1; }
+            if (isLoggedIn) {
+                // Hide login button
+                document.querySelector('.login-button').style.display = 'none';
+
+                // Update navbar profile photo
+                if (savedPhoto && document.getElementById('navProfileImg')) {
+                    document.getElementById('navProfileImg').src = savedPhoto;
+                    document.querySelector('.user-icon').classList.add('has-profile');
+                }
+            }
+
+            // Complete UI loading
+            if (accountSection) {
+                accountSection.classList.add('loaded');
+            }
+        });
+
+        function showSlides(n) {
+            let slides = document.querySelectorAll('.carousel-slide');
+            let slideTimer;
+
+            if (n > slides.length) { slideIndex = 1; }
+            if (n < 1) { slideIndex = slides.length; }
 
             // Hide all slides
             for (let i = 0; i < slides.length; i++) {
@@ -312,9 +349,10 @@
             }
 
             // Show the current slide
-            slides[slideIndex].classList.add('active');
+            slides[slideIndex - 1].classList.add('active');
 
             // Reset and start the progress bar animation
+            let progressBar = document.querySelector('.progress-bar');
             progressBar.style.animation = 'none';
             progressBar.offsetHeight; // Trigger reflow
             progressBar.style.animation = 'progressBarAnimation 5s linear';
@@ -322,27 +360,19 @@
             // Change slide every 5 seconds
             slideTimer = setTimeout(() => {
                 slideIndex++;
-                showSlides();
+                showSlides(slideIndex);
             }, 5000);
         }
 
-        // Initialize carousel when page loads
-        document.addEventListener('DOMContentLoaded', function () {
-            // Giriş durumunu ve profil fotoğrafını kontrol et
-            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-            const savedPhoto = localStorage.getItem('userPhoto');
+        function changeSlide(n) {
+            showSlides(slideIndex += n);
+        }
 
-            if (isLoggedIn) {
-                // Giriş yap butonunu gizle
-                document.querySelector('.login-button').style.display = 'none';
-
-                // Profil fotoğrafını göster
-                if (savedPhoto) {
-                    document.getElementById('navProfileImg').src = savedPhoto;
-                    document.querySelector('.user-icon').classList.add('has-profile');
-                }
-            }
-        });
+        function startAutoSlide() {
+            slideInterval = setInterval(() => {
+                showSlides(slideIndex);
+            }, 5000);
+        }
     </script>
 </body>
 

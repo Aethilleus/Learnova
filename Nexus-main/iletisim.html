@@ -57,8 +57,9 @@
                     <div class="info-item">
                         <div>
                             <h3>Telefon</h3>
-                            <p>+90 (212) 345 67 89</p>
-                            <p>+90 (532) 123 45 67</p>
+                            <p>+90 (501) 363 59 61</p>
+                            <p>+90 (546) 477 67 59</p>
+                            <p>+90 (537) 352 27 98</p>
                         </div>
                     </div>
                     <div class="info-item">
@@ -178,6 +179,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             const darkModeToggle = document.getElementById('darkModeToggle');
             const body = document.body;
+            const accountSection = document.querySelector('.account');
 
             const isDarkMode = localStorage.getItem('darkMode') === 'enabled';
             if (isDarkMode) {
@@ -202,10 +204,15 @@
                 document.querySelector('.login-button').style.display = 'none';
 
                 // Profil fotoğrafını göster
-                if (savedPhoto) {
+                if (savedPhoto && document.getElementById('navProfileImg')) {
                     document.getElementById('navProfileImg').src = savedPhoto;
                     document.querySelector('.user-icon').classList.add('has-profile');
                 }
+            }
+
+            // UI'ın yüklenmesini tamamla
+            if (accountSection) {
+                accountSection.classList.add('loaded');
             }
         });
 
