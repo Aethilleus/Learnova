@@ -477,6 +477,7 @@ body {
     --text-color: #ffffff;
     --card-bg: #2d2d2d;
     --border-color: #404040;
+    --like-color: #e0245e;
 }
 
 .dark-mode .header {
@@ -4907,14 +4908,16 @@ body.dark-mode .step p {
     --secondary-text-color: #536471;
     --border-color: #eff3f4;
     --hover-color: rgba(0, 0, 0, 0.05);
+    --like-color: #e0245e;
 }
 
 .dark-mode {
-    --bg-color: #15202b;
+    --bg-color: #2d2d2d;
     --text-color: #ffffff;
     --secondary-text-color: #8899a6;
-    --border-color: #38444d;
+    --border-color: #404040;
     --hover-color: rgba(255, 255, 255, 0.1);
+    --like-color: #e0245e;
 }
 
 .media-preview {
@@ -4962,4 +4965,29 @@ body.dark-mode .step p {
     margin-right: 0;
     background: #f5f5f5;
     border: 2px solid #e0e0e0;
+}
+
+/* Beğeni butonu stilleri */
+.action-btn.liked {
+    color: var(--like-color, #e0245e);
+}
+
+.action-btn.liked i {
+    color: var(--like-color, #e0245e);
+}
+
+.action-btn.liked:hover {
+    color: var(--like-color, #e0245e);
+}
+
+.dark-mode .action-btn.liked {
+    color: var(--like-color, #e0245e);
+}
+
+.dark-mode .action-btn.liked i {
+    color: var(--like-color, #e0245e);
+}
+
+.dark-mode .action-btn.liked:hover {
+    color: var(--like-color, #e0245e);
 }

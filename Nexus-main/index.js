@@ -585,10 +585,10 @@ function createPost() {
             ${mediaHTML}
         </div>
         <div class="post-actions">
-            <button class="action-btn"><i class="far fa-comment"></i> Yorum</button>
-            <button class="action-btn"><i class="fas fa-retweet"></i> Tekrar Paylaş</button>
-            <button class="action-btn"><i class="far fa-heart"></i> Beğen</button>
-            <button class="action-btn"><i class="far fa-share-square"></i> Paylaş</button>
+            <button class="action-btn"><i class="far fa-comment"></i> 0</button>
+            <button class="action-btn"><i class="fas fa-retweet"></i> 0</button>
+            <button class="action-btn"><i class="far fa-heart"></i> 0</button>
+            <button class="action-btn"><i class="far fa-share-square"></i></button>
             <div class="post-time">${currentTime}</div>
         </div>
     `;
@@ -618,4 +618,25 @@ document.addEventListener('DOMContentLoaded', function() {
             img.src = userPhoto;
         });
     }
+});
+
+// Beğeni işlevselliği
+document.addEventListener('DOMContentLoaded', function() {
+    const postsContainer = document.getElementById('postsContainer');
+    
+    postsContainer.addEventListener('click', function(e) {
+        const likeButton = e.target.closest('.action-btn');
+        if (likeButton && likeButton.querySelector('.fa-heart')) {
+            const likeCount = likeButton.textContent.trim();
+            const currentCount = parseInt(likeCount) || 0;
+            
+            if (likeButton.classList.contains('liked')) {
+                likeButton.classList.remove('liked');
+                likeButton.innerHTML = `<i class="far fa-heart"></i> ${currentCount - 1}`;
+            } else {
+                likeButton.classList.add('liked');
+                likeButton.innerHTML = `<i class="fas fa-heart"></i> ${currentCount + 1}`;
+            }
+        }
+    });
 });
