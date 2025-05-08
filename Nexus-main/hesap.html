@@ -116,6 +116,10 @@
                             <p>Leornova Leornova</p>
                         </div>
                         <div class="info-group">
+                            <label>Kullanıcı Adı</label>
+                            <p>@leornova</p>
+                        </div>
+                        <div class="info-group">
                             <label>E-posta</label>
                             <p>example@gmail.com</p>
                         </div>
@@ -173,6 +177,41 @@
                 localStorage.setItem('darkMode', 'enabled');
             } else {
                 localStorage.setItem('darkMode', null);
+            }
+        });
+
+        // Ad Soyad ve Kullanıcı Adı bilgisini localStorage'a kaydet (sayfa yüklenince ve düzenleme sonrası)
+        function saveFullNameToLocalStorage(fullName) {
+            if (fullName) {
+                const [firstName, ...rest] = fullName.trim().split(' ');
+                const lastName = rest.join(' ');
+                localStorage.setItem('firstName', firstName);
+                localStorage.setItem('lastName', lastName);
+            }
+        }
+        function saveUserHandleToLocalStorage(handle) {
+            if (handle) {
+                // @ işareti varsa kaldır
+                const cleanHandle = handle.replace(/^@+/, '');
+                localStorage.setItem('userHandle', '@' + cleanHandle);
+            }
+        }
+        // Sayfa yüklendiğinde mevcut Ad Soyad ve Kullanıcı Adı'nı kaydet
+        document.addEventListener('DOMContentLoaded', function () {
+            // Sol paneldeki büyük isim
+            const profileName = document.querySelector('.profile-info h2');
+            if (profileName) {
+                saveFullNameToLocalStorage(profileName.textContent);
+            }
+            // Bilgi kartındaki isim
+            const infoName = document.querySelector('.info-group label + p');
+            if (infoName) {
+                saveFullNameToLocalStorage(infoName.textContent);
+            }
+            // Kullanıcı adı
+            const userHandleP = Array.from(document.querySelectorAll('.info-group label')).find(l => l.textContent.includes('Kullanıcı Adı'))?.nextElementSibling;
+            if (userHandleP) {
+                saveUserHandleToLocalStorage(userHandleP.textContent);
             }
         });
 
@@ -268,11 +307,9 @@
                 btn.addEventListener('click', function () {
                     const section = this.closest('section');
                     const infoGroups = section.querySelectorAll('.info-group');
-
                     infoGroups.forEach(group => {
                         const label = group.querySelector('label').textContent;
                         const text = group.querySelector('p')?.textContent || '';
-
                         if (group.querySelector('p')) {
                             const input = document.createElement('input');
                             input.type = 'text';
@@ -283,18 +320,15 @@
                             input.style.borderRadius = '4px';
                             input.style.border = '1px solid #ddd';
                             input.style.marginTop = '5px';
-
                             // Dark mode için input stilleri
                             if (body.classList.contains('dark-mode')) {
                                 input.style.backgroundColor = '#2d2d2d';
                                 input.style.color = '#fff';
                                 input.style.border = '1px solid #444';
                             }
-
                             group.querySelector('p').replaceWith(input);
                         }
                     });
-
                     // Düzenleme butonunu Kaydet butonu ile değiştir
                     const saveBtn = document.createElement('button');
                     saveBtn.textContent = 'Kaydet';
@@ -302,20 +336,27 @@
                     saveBtn.style.background = '#28a745';
                     saveBtn.style.color = 'white';
                     saveBtn.style.border = 'none';
-
                     saveBtn.addEventListener('click', function () {
                         infoGroups.forEach(group => {
                             const input = group.querySelector('.edit-input');
                             if (input) {
                                 const p = document.createElement('p');
                                 p.textContent = input.value;
+                                // Ad Soyad veya Kullanıcı Adı ise localStorage'a kaydet
+                                const label = group.querySelector('label').textContent;
+                                if (label.includes('Ad Soyad')) {
+                                    saveFullNameToLocalStorage(input.value);
+                                }
+                                if (label.includes('Kullanıcı Adı')) {
+                                    saveUserHandleToLocalStorage(input.value);
+                                    // @ işaretiyle göster
+                                    p.textContent = input.value.startsWith('@') ? input.value : '@' + input.value;
+                                }
                                 input.replaceWith(p);
                             }
                         });
-
                         this.replaceWith(btn);
                     });
-
                     this.replaceWith(saveBtn);
                 });
             });

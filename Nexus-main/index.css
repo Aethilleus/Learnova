@@ -4766,3 +4766,200 @@ body.dark-mode .step p {
 .dark-mode .logout-btn:hover {
     background-color: #a71d2a;
 }
+
+/* Gönderi Oluşturma Alanı */
+.post-creator {
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.post-creator-header {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.post-creator textarea {
+    width: 100%;
+    min-height: 100px;
+    border: none;
+    resize: none;
+    background: transparent;
+    color: var(--text-color);
+    font-size: 16px;
+    padding: 10px;
+}
+
+.post-creator-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border-color);
+    padding-top: 15px;
+}
+
+.post-actions {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    position: relative;
+}
+
+.post-time {
+    margin-left: auto;
+    color: var(--secondary-text-color);
+    font-size: 14px;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 20px;
+    transition: background-color 0.2s;
+}
+
+.action-btn:hover {
+    background-color: var(--hover-color);
+}
+
+.post-btn {
+    background-color: #1da1f2;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.post-btn:hover {
+    background-color: #1a91da;
+}
+
+/* Gönderiler */
+.posts {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.post {
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.post-header {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.profile-pic {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.post-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.post-user {
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.post-username {
+    color: var(--secondary-text-color);
+    font-size: 14px;
+}
+
+.post-content {
+    margin-bottom: 15px;
+}
+
+.post-content p {
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.post-image {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+/* Dark mode için değişkenler */
+:root {
+    --bg-color: #ffffff;
+    --text-color: #0f1419;
+    --secondary-text-color: #536471;
+    --border-color: #eff3f4;
+    --hover-color: rgba(0, 0, 0, 0.05);
+}
+
+.dark-mode {
+    --bg-color: #15202b;
+    --text-color: #ffffff;
+    --secondary-text-color: #8899a6;
+    --border-color: #38444d;
+    --hover-color: rgba(255, 255, 255, 0.1);
+}
+
+.media-preview {
+    margin-top: 10px;
+    max-width: 100%;
+    display: none;
+}
+
+.media-preview img,
+.media-preview video {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.media-preview.active {
+    display: block;
+}
+
+.post {
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.post-creator .profile-pic {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    background: #f5f5f5;
+    border: 2px solid #e0e0e0;
+}

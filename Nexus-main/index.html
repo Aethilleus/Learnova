@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anasayfa - Leornova</title>
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="index.js"></script>
 </head>
 <script>
@@ -153,7 +154,74 @@
 
             <!-- Ana İçerik -->
             <div class="content">
-                <!-- Buraya ana içerik gelecek -->
+                <!-- Gönderi Oluşturma Alanı -->
+                <div class="post-creator">
+                    <div class="post-creator-header">
+                        <img src="user.png" alt="Profil" class="profile-pic">
+                        <textarea placeholder="Ne düşünüyorsun?" id="postContent"></textarea>
+                    </div>
+                    <div class="post-creator-footer">
+                        <div class="post-actions">
+                            <input type="file" id="imageInput" accept="image/*" style="display: none;">
+                            <input type="file" id="videoInput" accept="video/*" style="display: none;">
+                            <button class="action-btn" onclick="document.getElementById('imageInput').click()">
+                                <i class="fas fa-image"></i> Fotoğraf
+                            </button>
+                            <button class="action-btn" onclick="document.getElementById('videoInput').click()">
+                                <i class="fas fa-video"></i> Video
+                            </button>
+                        </div>
+                        <button class="post-btn" onclick="createPost()">Paylaş</button>
+                    </div>
+                    <div id="mediaPreview" class="media-preview"></div>
+                </div>
+
+                <!-- Gönderiler -->
+                <div class="posts" id="postsContainer">
+                    <!-- Örnek Gönderi 1 -->
+                    <div class="post">
+                        <div class="post-header">
+                            <img id="postProfileImg1" src="user.png" alt="Profil" class="profile-pic">
+                            <div class="post-info">
+                                <div class="post-user">Ahmet Yılmaz</div>
+                                <div class="post-username">@ahmetyilmaz</div>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            <p>Bugün matematik dersinde öğrendiğimiz integral konusunu tekrar ediyorum. Çok ilginç bir konu!</p>
+                            <img src="math.jpg" alt="Matematik Notları" class="post-image">
+                        </div>
+                        <div class="post-actions">
+                            <button class="action-btn"><i class="far fa-comment"></i> 24</button>
+                            <button class="action-btn"><i class="fas fa-retweet"></i> 12</button>
+                            <button class="action-btn"><i class="far fa-heart"></i> 156</button>
+                            <button class="action-btn"><i class="far fa-share-square"></i></button>
+                            <div class="post-time">17:30</div>
+                        </div>
+                    </div>
+
+                    <!-- Örnek Gönderi 2 -->
+                    <div class="post">
+                        <div class="post-header">
+                            <img id="postProfileImg2" src="user.png" alt="Profil" class="profile-pic">
+                            <div class="post-info">
+                                <div class="post-user">Ayşe Demir</div>
+                                <div class="post-username">@aysedemir</div>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            <p>Fizik laboratuvarında yaptığımız deney sonuçları çok etkileyiciydi! #Fizik #Bilim</p>
+                            <img src="physics.jpg" alt="Fizik Deneyi" class="post-image">
+                        </div>
+                        <div class="post-actions">
+                            <button class="action-btn"><i class="far fa-comment"></i> 18</button>
+                            <button class="action-btn"><i class="fas fa-retweet"></i> 8</button>
+                            <button class="action-btn"><i class="far fa-heart"></i> 89</button>
+                            <button class="action-btn"><i class="far fa-share-square"></i></button>
+                            <div class="post-time">16:45</div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Sağ Menü -->

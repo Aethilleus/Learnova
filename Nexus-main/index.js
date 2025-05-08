@@ -498,3 +498,124 @@ document.querySelector('.carousel-container')?.addEventListener('mouseenter', ()
 
 // Resume auto-slide when mouse leaves
 document.querySelector('.carousel-container')?.addEventListener('mouseleave', startAutoSlide);
+
+// Gönderi oluşturma ve medya yükleme işlevleri
+let selectedMedia = null;
+
+document.getElementById('imageInput').addEventListener('change', function(e) {
+    handleMediaSelect(e, 'image');
+});
+
+document.getElementById('videoInput').addEventListener('change', function(e) {
+    handleMediaSelect(e, 'video');
+});
+
+function handleMediaSelect(event, type) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const preview = document.getElementById('mediaPreview');
+    preview.innerHTML = '';
+    preview.classList.add('active');
+
+    if (type === 'image') {
+        if (!file.type.startsWith('image/')) {
+            alert('Lütfen geçerli bir resim dosyası seçin.');
+            return;
+        }
+        const img = document.createElement('img');
+        img.src = URL.createObjectURL(file);
+        preview.appendChild(img);
+    } else if (type === 'video') {
+        if (!file.type.startsWith('video/')) {
+            alert('Lütfen geçerli bir video dosyası seçin.');
+            return;
+        }
+        const video = document.createElement('video');
+        video.src = URL.createObjectURL(file);
+        video.controls = true;
+        preview.appendChild(video);
+    }
+
+    selectedMedia = file;
+}
+
+function createPost() {
+    const content = document.getElementById('postContent').value.trim();
+    if (!content && !selectedMedia) {
+        alert('Lütfen bir mesaj yazın veya medya ekleyin.');
+        return;
+    }
+
+    const postsContainer = document.getElementById('postsContainer');
+    const newPost = document.createElement('div');
+    newPost.className = 'post';
+
+    const currentTime = new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' });
+    const currentDate = new Date().toLocaleDateString('tr-TR');
+
+    // Profil fotoğrafını ve kullanıcı bilgilerini localStorage'dan al
+    const userPhoto = localStorage.getItem('userPhoto') || 'user.png';
+    const firstName = localStorage.getItem('firstName') || '';
+    const lastName = localStorage.getItem('lastName') || '';
+    const userHandle = localStorage.getItem('userHandle') || '@kullanici';
+
+    // Ad ve soyadı birleştir, eğer yoksa varsayılan değeri kullan
+    const fullName = (firstName && lastName) ? `${firstName} ${lastName}` : 'Kullanıcı Adı';
+
+    let mediaHTML = '';
+    if (selectedMedia) {
+        if (selectedMedia.type.startsWith('image/')) {
+            mediaHTML = `<img src="${URL.createObjectURL(selectedMedia)}" class="post-image" alt="Gönderi görseli">`;
+        } else if (selectedMedia.type.startsWith('video/')) {
+            mediaHTML = `<video src="${URL.createObjectURL(selectedMedia)}" class="post-image" controls></video>`;
+        }
+    }
+
+    newPost.innerHTML = `
+        <div class="post-header">
+            <img src="${userPhoto}" alt="Profil" class="profile-pic">
+            <div class="post-info">
+                <span class="post-user">${fullName}</span>
+                <span class="post-username">${userHandle}</span>
+            </div>
+        </div>
+        <div class="post-content">
+            <p>${content}</p>
+            ${mediaHTML}
+        </div>
+        <div class="post-actions">
+            <button class="action-btn"><i class="far fa-comment"></i> Yorum</button>
+            <button class="action-btn"><i class="fas fa-retweet"></i> Tekrar Paylaş</button>
+            <button class="action-btn"><i class="far fa-heart"></i> Beğen</button>
+            <button class="action-btn"><i class="far fa-share-square"></i> Paylaş</button>
+            <div class="post-time">${currentTime}</div>
+        </div>
+    `;
+
+    // Yeni gönderiyi en üste ekle
+    postsContainer.insertBefore(newPost, postsContainer.firstChild);
+
+    // Formu temizle
+    document.getElementById('postContent').value = '';
+    document.getElementById('mediaPreview').innerHTML = '';
+    document.getElementById('mediaPreview').classList.remove('active');
+    selectedMedia = null;
+}
+
+// Sayfa yüklendiğinde gönderi oluşturma alanındaki ve örnek gönderilerdeki profil fotoğraflarını güncelle
+document.addEventListener('DOMContentLoaded', function() {
+    const userPhoto = localStorage.getItem('userPhoto');
+    if (userPhoto) {
+        const postCreatorProfilePic = document.querySelector('.post-creator .profile-pic');
+        if (postCreatorProfilePic) {
+            postCreatorProfilePic.src = userPhoto;
+        }
+
+        // Örnek gönderilerdeki profil fotoğraflarını güncelle
+        const postProfileImgs = document.querySelectorAll('#postProfileImg1, #postProfileImg2');
+        postProfileImgs.forEach(img => {
+            img.src = userPhoto;
+        });
+    }
+});
